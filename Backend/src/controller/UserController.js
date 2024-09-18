@@ -17,14 +17,14 @@ export const createUser = async (req, res) => {
           imageLocalPath = req.files.image[0].path;
       }
 
-      console.log("imageLocalPath: ", imageLocalPath);
+      
 
       if (!imageLocalPath) {
           return res.status(400).send("Image file is required");
       }
 
       const image = await uploadOnCloudinary(imageLocalPath);
-      console.log("image: ", image);
+      
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -94,5 +94,85 @@ export const loginUser = async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({ message: 'Error logging in', error: err.message });
+    }
+};
+
+
+export const getUserById = async (req, res) => {
+    try {
+        const { userId } = req.params; // Extract the user ID from the route params
+
+        // Find user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Return user details
+        res.status(200).json({
+            message: 'User found',
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                image: user.image,
+                phoneNo: user.phoneNo,
+                title: user.title,
+                address: user.address,
+                socialMedia: user.socialMedia
+            }
+        });
+    } catch (err) {
+        console.error('Error retrieving user:', err);
+        res.status(500).json({ message: 'Error retrieving user', error: err.message });
+    }
+};
+
+export const deleteUserById = async (req, res) => {
+    try {
+        const { userId } = req.params; // Extract the user ID from the route params
+
+        // Find and delete the user by ID
+        const user = await User.findByIdAndDelete(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Return a success message
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting user:', err);
+        res.status(500).json({ message: 'Error deleting user', error: err.message });
+    }
+};
+
+export const updateUserById = async (req, res) => {
+    try {
+        const { userId } = req.params; // Extract the user ID from the route params
+        const updateData = req.body; // Get the update data from the request body
+
+        // Find and update the user by ID
+        const user = await User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Return the updated user details
+        res.status(200).json({
+            message: 'User updated successfully',
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                image: user.image,
+                phoneNo: user.phoneNo,
+                title: user.title,
+                address: user.address,
+                socialMedia: user.socialMedia
+            }
+        });
+    } catch (err) {
+        console.error('Error updating user:', err);
+        res.status(500).json({ message: 'Error updating user', error: err.message });
     }
 };

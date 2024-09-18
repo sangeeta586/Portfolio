@@ -1,17 +1,21 @@
-// src/middleware/authMiddleware.js
-import jwt from 'jsonwebtoken';
+import JWT from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
+const userAuth = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-export const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Authentication failed" });
+  }
 
-    if (token == null) return res.status(401).json({ message: 'Token required' });
+  const token = authHeader.split(" ")[1];
 
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.status(403).json({ message: 'Invalid token' });
-        req.user = user; // Save user info in request object
-        next();
-    });
+  try {
+    const payload = JWT.verify(token, process.env.JWT_SECRET);
+    req.user = { userId: payload.userId };
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: "Authentication failed" });
+  }
 };
+
+export default userAuth;

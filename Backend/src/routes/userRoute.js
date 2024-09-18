@@ -1,6 +1,7 @@
 import express from 'express';
-import { createUser ,loginUser} from '../controller/UserController.js';
+import { createUser ,loginUser, getUserById,deleteUserById,updateUserById  } from '../controller/UserController.js';
 import { upload } from '../middleware/multerMiddleware.js';
+import authMiddleware from "../middleware/authMiddleware.js"
 
 const router = express.Router();
 
@@ -11,5 +12,8 @@ router.post(
 );
 
 router.post('/login', loginUser);
+router.get('/getById/:userId',authMiddleware, getUserById);
+router.delete('/delete/:userId', deleteUserById);
+router.put('/update/:userId', updateUserById);
 
 export default router;

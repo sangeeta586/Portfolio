@@ -4,20 +4,32 @@ import morgan from "morgan";
 import cors from "cors";
 import connectDb from "./src/db/conn.js";
 import userRoutes from "./src/routes/userRoute.js"
+import skillRoutes from "./src/routes/skillRoute.js"
+import educationRoutes from "./src/routes/educationRoute.js"
+import certificateRoutes from "./src/routes/certificateRoutes.js"
+import projectRoutes from "./src/routes/projectRoute.js"
+import experienceRoutes from "./src/routes/experienceRoute.js"
+import languageRoutes from "./src/routes/languageRoutes.js"
+
 dotenv.config();
 connectDb();
 
 const app = express();
 
-// Use express.json() middleware correctly
+
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
+
+
 app.use('/api/users', userRoutes);
-// Routes
-app.get("/", (req, res) => {
-    res.send("First node js");
-});
+app.use('/api/skills', skillRoutes);
+app.use('/api/educations', educationRoutes);
+app.use('/api/certificates', certificateRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/experiences', experienceRoutes);
+app.use('/api/languages', languageRoutes);
+
 
 
 
