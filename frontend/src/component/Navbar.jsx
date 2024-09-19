@@ -26,9 +26,9 @@ export const Navbar = () => {
         <div className={`lg:flex space-x-4 ${isMenuOpen ? 'flex-col lg:hidden' : 'hidden'}`}>
           <a href="#home" className="text-gray-700 hover:text-gray-900">Home</a>
           <a href="#about" className="text-gray-700 hover:text-gray-900">About</a>
-          <a href="/education" className="text-gray-700 hover:text-gray-900">Education</a>
-          <a href="/skills" className="text-gray-700 hover:text-gray-900">Skills</a>
-          <a href="/projects" className="text-gray-700 hover:text-gray-900">Projects</a>
+          <a href="#education" className="text-gray-700 hover:text-gray-900">Education</a>
+          <a href="#skills" className="text-gray-700 hover:text-gray-900">Skills</a>
+          <a href="#projects" className="text-gray-700 hover:text-gray-900">Projects</a>
           <a href="#contact" className="text-gray-700 hover:text-gray-900">Contact</a>
           <a href="/login" className="text-gray-700 hover:text-gray-900">Login</a>
         </div>
@@ -42,9 +42,9 @@ export const Navbar = () => {
             <div className="flex flex-col items-center space-y-4 p-4">
               <a href="#home" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Home</a>
               <a href="#about" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>About</a>
-              <a href="/education" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Education</a>
-              <a href="/skills" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Skills</a>
-              <a href="/projects" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Projects</a>
+              <a href="#education" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Education</a>
+              <a href="#skills" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Skills</a>
+              <a href="#projects" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Projects</a>
               <a href="#contact" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Contact</a>
               <a href="/login" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Login</a>
             </div>

@@ -61,10 +61,11 @@ body {
 }
 
 #home {
-  min-height: 100vh;
+  min-height:100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2500px;
 }
 #home a {
   color: rgb(37, 35, 35);
@@ -99,6 +100,7 @@ body {
   cursor: pointer;
   transform: scale(1.03);
 }
+
 #projects .col-lg-4 {
   padding: 20px;
 }
