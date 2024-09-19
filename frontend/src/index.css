@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .bg-hero-pattern {
+    background-image: url("your-image-url.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+}
