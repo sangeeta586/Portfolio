@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     title: {
         type: String
     },
+    Bio:{
+        type: String,
+        
+    },
     address: {
         type: String
     },

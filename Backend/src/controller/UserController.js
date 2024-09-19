@@ -176,3 +176,18 @@ export const updateUserById = async (req, res) => {
         res.status(500).json({ message: 'Error updating user', error: err.message });
     }
 };
+
+export const getUser = async (req, res) => {
+    try {
+        const users = await User.findOne({}) // Retrieve all users. Adjust limit/pagination as needed.
+
+        // Return the list of users
+        res.status(200).json({
+            users
+        });
+    } catch (err) {
+        console.error('Error retrieving users:', err); // Log full error object for more details
+        res.status(500).json({ message: 'Error retrieving users', error: err.message });
+    }
+};
+

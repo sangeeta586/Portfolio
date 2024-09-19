@@ -8,7 +8,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white shadow-md">
+    <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
       <nav className="flex items-center justify-between p-4 max-w-7xl mx-auto">
         <a href="#" className="flex items-center">
           <img
