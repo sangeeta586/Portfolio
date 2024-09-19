@@ -1,5 +1,5 @@
 import express from 'express';
-import { createProject, getProjectById, updateProject, deleteProject } from '../controller/projectController.js';
+import { createProject,getAllProjects, getProjectById, updateProject, deleteProject } from '../controller/projectController.js';
 
 const router = express.Router();
 
@@ -8,6 +8,7 @@ router.post('/create', createProject);
 
 // Route to get a project by ID
 router.get('/getById/:id', getProjectById);
+router.get('/getAll/', getAllProjects);
 
 // Route to update a project by ID
 router.put('/update/:id', updateProject);

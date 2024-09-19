@@ -20,7 +20,7 @@ export const Aboutme = () => {
     }
   };
 
-  if (!userProfile) return <p>Loading...</p>;
+  if (!userProfile) return <p className='flex justify-center items-center content-center'><span class="loader"></span></p>;
 
   // Find the resume URL in the socialMedia array
   const resumeLink = userProfile.socialMedia.find((social) => social.name === 'resume')?.url;

@@ -2,8 +2,8 @@ import React from 'react';
 import { Navbar } from './Navbar';
 
 import { Aboutme } from './Aboutme';
-import { Eduction } from './Eduction';
-import { Skill } from './Skill';
+import { Education } from './Eduction';
+import  Skill  from './Skill';
 import { Project } from './Project';
 import { Footer } from './Footer';
 import { Profile } from './Profile';
@@ -18,7 +18,7 @@ function Portfolio() {
             <main className="pt-20">
                 <Profile />
                 <Aboutme />
-                <Eduction />
+                <Education />
                 <Skill />
                 <Project />
 

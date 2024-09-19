@@ -13,6 +13,18 @@ export const createEducation = async (req, res) => {
   }
 };
 
+export const getAllEducation = async (req, res) => {
+  try {
+    const educationRecords = await Education.find(); // Fetch all education records
+    if (educationRecords.length === 0) {
+      return res.status(404).json({ message: 'No education records found' });
+    }
+    res.status(200).json(educationRecords);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 // Get an education record by ID
 export const getEducationById = async (req, res) => {
   try {

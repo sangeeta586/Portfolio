@@ -8,10 +8,12 @@ export const Profile = () => {
     const typedRef = useRef(null);
     const URI = import.meta.env.VITE_API_URL;
 
+    // Fetch user profile data on component mount
     useEffect(() => {
         fetchUserProfile();
-    }, []);
+    }, []); 
 
+    // Initialize Typed.js for typing animation
     useEffect(() => {
         if (userProfile && typedRef.current) {
             const typed = new Typed(typedRef.current, {
@@ -28,25 +30,32 @@ export const Profile = () => {
         }
     }, [userProfile]);
 
+    // Fetch user profile data from the API
     const fetchUserProfile = async () => {
         try {
             const response = await axios.get(`${URI}/api/users/getUser`);
+            console.log("Fetched data:", response.data.users); // Log fetched data
             setUserProfile(response.data.users);
         } catch (error) {
             console.error('Error fetching user profile:', error);
         }
     };
 
-    if (!userProfile) return <p>Loading...</p>;
+    // Loader while fetching data
+    if (!userProfile) return (
+        <p className='flex justify-center items-center content-center'>
+            <span className="loader"></span>
+        </p>
+    );
 
     return (
-        <section id="home" className="flex flex-col lg:flex-row items-center justify-between p-6 max-w-7xl mx-auto">
+        <section id="home" className="flex flex-col lg:flex-row items-center justify-between p-6 max-w-7xl mx-auto ">
             <div className="lg:w-2/3 text-center lg:text-left">
                 <motion.h1 
                     className="text-4xl font-bold mb-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 10, ease: "easeOut" }}
+                    transition={{ duration: 1, ease: "easeOut" }}
                 >
                     👋 Hello, I am {userProfile.name}
                 </motion.h1>
@@ -61,6 +70,7 @@ export const Profile = () => {
                     ))}
                 </div>
             </div>
+            
             <div className="lg:w-1/3 text-center mb-6 lg:mb-0 z-0 relative">
                 <img
                     src={userProfile.image || "https://i.postimg.cc/Px1cN7b9/111.png"}
@@ -72,6 +82,7 @@ export const Profile = () => {
     );
 };
 
+// Function to get the icon based on the platform name
 const getIcon = (platformName) => {
     switch (platformName.toLowerCase()) {
         case 'linkedin':
