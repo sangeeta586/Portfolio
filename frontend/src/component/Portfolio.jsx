@@ -16,7 +16,7 @@ function Portfolio() {
             <Navbar />
 
             <main className="pt-20">
-                 <Profile/>
+                <Profile />
                 <Aboutme />
                 <Eduction />
                 <Skill />
