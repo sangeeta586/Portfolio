@@ -14,6 +14,10 @@ router.post(
 router.post('/login', loginUser);
 router.get('/getById/:userId',authMiddleware, getUserById);
 router.delete('/delete/:userId', deleteUserById);
-router.put('/update/:userId', updateUserById);
+router.put('/update/:userId', 
+    upload.fields([{ name: 'image', maxCount: 1 }]), // Ensure this is correctly placed before updateUserById
+    updateUserById
+);
+
 
 export default router;

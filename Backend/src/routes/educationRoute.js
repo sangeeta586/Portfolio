@@ -5,7 +5,8 @@ import {
   createEducation,
   getEducationById,
   updateEducation,
-  deleteEducation
+  deleteEducation,
+  getAllEducation
 } from '../controller/educationController.js';
 import authMiddleware from "../middleware/authMiddleware.js"
 
@@ -16,6 +17,7 @@ router.post('/create',authMiddleware, createEducation);
 
 // Get an education record by ID
 router.get('/getById/:id',authMiddleware, getEducationById);
+router.get('/getAllEdu', getAllEducation);
 
 // Update an education record by ID
 router.put('/update/:id', authMiddleware,updateEducation);

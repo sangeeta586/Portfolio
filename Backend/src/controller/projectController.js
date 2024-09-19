@@ -11,6 +11,18 @@ export const createProject = async (req, res) => {
   }
 };
 
+export const getAllProjects = async (req, res) => {
+  try {
+    const projects = await Project.find(); // Fetch all project records
+    if (projects.length === 0) {
+      return res.status(404).json({ message: 'No projects found' });
+    }
+    res.status(200).json(projects);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 // Get a project by ID
 export const getProjectById = async (req, res) => {
   try {

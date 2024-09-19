@@ -1,13 +1,23 @@
 import React from 'react';
-import './App.css'; // Assuming your CSS is in App.css
+import './App.css'; 
 import Portfolio from './component/Portfolio';
-
+import UserRegistration from './component/UserRegistration';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Education } from './component/Eduction';
+import { Skill } from './component/Skill';
+import { Project } from './component/Project';
 
 const App = () => {
-
-
   return (
-    <Portfolio/>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/login" element={<UserRegistration />} />
+        <Route path="/education" element={<Education />} />
+        <Route path="/skills" element={<Skill />} />
+        <Route path="/projects" element={<Project />} />
+      </Routes>
+    </Router>
   );
 };
 
