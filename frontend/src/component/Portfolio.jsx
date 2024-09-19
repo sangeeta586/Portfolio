@@ -1,11 +1,12 @@
 import React from 'react';
 import { Navbar } from './Navbar';
-import { Profile } from './Profile';
+
 import { Aboutme } from './Aboutme';
 import { Eduction } from './Eduction';
 import { Skill } from './Skill';
 import { Project } from './Project';
 import { Footer } from './Footer';
+import { Profile } from './Profile';
 
 
 function Portfolio() {
@@ -15,8 +16,7 @@ function Portfolio() {
             <Navbar />
 
             <main className="pt-20">
-
-                <Portfolio />
+                 <Profile/>
                 <Aboutme />
                 <Eduction />
                 <Skill />
