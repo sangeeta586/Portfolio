@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'; 
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-//import './.css'; // Custom CSS for styling
+import './CreateProfile.css'; // Custom CSS for styling
 
 const UserForm = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
-  const URI = import.meta.env.VITE_API_URL;
+
   // Function to handle form submission
   const onSubmit = async (data) => {
     try {
       // Post the form data to the backend
-      const response = await axios.post(`${URI}/api/users/create`, data); // Update the URL as needed
+      const response = await axios.post('/api/users/register', data); // Update the URL as needed
       console.log('Response from server:', response.data);
 
       // Reset form on successful submission

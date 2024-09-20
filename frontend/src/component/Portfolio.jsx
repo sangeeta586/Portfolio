@@ -8,6 +8,7 @@ import { Project } from './Project';
 import { Footer } from './Footer';
 import { Profile } from './Profile';
 import  ContactUs  from './ContactUs';
+import CreateProfile from '../admin/CreateProfile';
 
 
 function Portfolio() {
@@ -15,8 +16,8 @@ function Portfolio() {
         <div className="font-sans text-gray-900">
 
             <Navbar />
-
-            <main className="pt-20 ">
+             <CreateProfile/>
+            {/* <main className="pt-20 ">
                 <Profile />
                 <Aboutme />
                 <Education />
@@ -26,7 +27,7 @@ function Portfolio() {
 
             </main>
             <ContactUs/>
-            <Footer />
+            <Footer /> */}
         </div>
     );
 }
