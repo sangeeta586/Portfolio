@@ -7,6 +7,7 @@ import  Skill  from './Skill';
 import { Project } from './Project';
 import { Footer } from './Footer';
 import { Profile } from './Profile';
+import ContactUs from './ContactUs';
 
 
 function Portfolio() {
@@ -23,7 +24,7 @@ function Portfolio() {
                 <Project />
 
             </main>
-
+            <ContactUs/>
             <Footer />
         </div>
     );
