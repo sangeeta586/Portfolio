@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './UserRegistration.css'; // Ensure you import the updated CSS file
+import { useNavigate } from 'react-router-dom';
 
 const UserRegistration = () => {
   const [activeForm, setActiveForm] = useState('login');
@@ -8,8 +9,12 @@ const UserRegistration = () => {
   const [signupName, setSignupName] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
+  const nagivate = useNavigate()
 
    const BASE_URL = import.meta.env.VITE_API_URL;
+
+  
+  
 
 
   const handleLoginSubmit = async (e) => {
@@ -28,6 +33,13 @@ const UserRegistration = () => {
       const data = await response.json();
       // Handle the response data
       console.log(data);
+      localStorage.setItem("token",data.token
+      )
+      localStorage.setItem("userId",data.user.id)
+      localStorage.setItem("email",data.user.email)
+      
+
+      nagivate("/admin-dashboard")
     } catch (error) {
       console.error('Error during login:', error);
     }

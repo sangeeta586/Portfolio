@@ -6,13 +6,30 @@ import { SiKnowledgebase } from "react-icons/si";
 import { MdCastForEducation } from "react-icons/md";
 import { MdContactPhone } from "react-icons/md";
 import './Sidebar.css'; // Import the CSS file
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const navigate = useNavigate();
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
+
+  const menuItems = [
+    { label: 'Profile', icon: <FaHouseUser />, route: '/profile' },
+    { label: 'Skills', icon: <GiSkills />, route: '/skills' },
+    { label: 'Projects', icon: <GoProjectSymlink />, route: '/projects' },
+    { label: 'Experience', icon: <SiKnowledgebase />, route: '/experience' },
+    { label: 'Education', icon: <MdCastForEducation />, route: '/education' },
+    { label: 'Contact Info', icon: <MdContactPhone />, route: '/contact' },
+    { label: 'Logout', icon: <FaSignOutAlt />, action: handleLogout },
+  ];
 
   return (
     <div className="sidebar-wrapper">
@@ -26,13 +43,12 @@ const Sidebar = () => {
             <span>Username</span>
           </div>
           <div className="indicator" id="indicator"></div>
-          <li><i className="icon"><FaHouseUser /></i><span>Profile</span></li>
-          <li><i className="icon"><GiSkills /></i><span>Skills</span></li>
-          <li><i className="icon"><GoProjectSymlink /></i><span>Projects</span></li>
-          <li><i className="icon"><SiKnowledgebase /></i><span>Experience</span></li>
-          <li><i className="icon"><MdCastForEducation /></i><span>Education</span></li>
-          <li><i className="icon"><MdContactPhone /></i><span>Contact Info</span></li>
-          <li><i className="icon"><FaSignOutAlt /></i><span>Logout</span></li>
+          {menuItems.map((item, index) => (
+            <li key={index} onClick={item.action ? item.action : () => navigate(item.route)}>
+              <i className="icon">{item.icon}</i>
+              <span>{item.label}</span>
+            </li>
+          ))}
         </ul>
       </div>
       <button className="toggle-btn" onClick={toggleSidebar}>
