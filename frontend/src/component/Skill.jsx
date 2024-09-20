@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Skill = () => {
+  const [skills, setSkills] = useState([]);
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/skills/getAllSkills`);
+        const data = await response.json();
+        setSkills(data);
+      } catch (error) {
+        console.error('Error fetching skills:', error);
+      }
+    };
+
+    fetchSkills();
+  }, []);
+
   return (
-    <section className="skills bg-white  px-20 py-10" >
+    <section className="skills bg-white lg:px-60 px-10 py-10">
       <div className="max-width">
         <h2 className="title">My Skills</h2>
         <div className="skills-content">
@@ -20,48 +37,15 @@ const Skill = () => {
             <a href="#contact">Learn more</a>
           </div>
           <div className="column right">
-            <div className="bars">
-              <div className="info">
-                <span>HTML</span>
-                <span>90%</span>
+            {skills.map((skill) => (
+              <div className="bars" key={skill._id}>
+                <div className="info">
+                  <span>{skill.name}</span>
+                  <span>{skill.rating * 20}%</span>
+                </div>
+                <div className="line wordpress" style={{ width: `${skill.rating * 20}%` }}></div>
               </div>
-              <div className="line html"></div>
-            </div>
-            <div className="bars">
-              <div className="info">
-                <span>CSS</span>
-                <span>60%</span>
-              </div>
-              <div className="line css"></div>
-            </div>
-            <div className="bars">
-              <div className="info">
-                <span>JavaScript</span>
-                <span>50%</span>
-              </div>
-              <div className="line js"></div>
-            </div>
-            <div className="bars">
-              <div className="info">
-                <span>Adobe Photoshop</span>
-                <span>50%</span>
-              </div>
-              <div className="line photoshop"></div>
-            </div>
-            <div className="bars">
-              <div className="info">
-                <span>Corel Draw</span>
-                <span>85%</span>
-              </div>
-              <div className="line corel"></div>
-            </div>
-            <div className="bars">
-              <div className="info">
-                <span>WordPress</span>
-                <span>75%</span>
-              </div>
-              <div className="line wordpress"></div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

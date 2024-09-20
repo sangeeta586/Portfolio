@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FaUser, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
-import "./ContactUs.css"
+import "./ContactUs.css";
 
 const ContactUs = () => {
+    const [userProfile, setUserProfile] = useState({
+        name: '',
+        email: '',
+        address: ''
+    });
+
+    const URI = import.meta.env.VITE_API_URL;
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await axios.get(`${URI}/api/users/getUser`);
+                console.log("Fetched data:", response.data.users);
+                setUserProfile(response.data.users);
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
+            }
+        };
+
+        fetchUserProfile();
+    }, [URI]);
+
     return (
         <section className="contact bg-white py-12" id="contact">
             <div className="max-w-6xl mx-auto px-4">
-                <h2 className="title text-3xl font-bold  relative after:absolute after:left-0 after:right-0 after:bottom-0 after:border-b-2 after:border-crimson after:w-full">
+                <h2 className="title text-3xl font-bold relative after:absolute after:left-0 after:right-0 after:bottom-0 after:border-b-2 after:border-crimson after:w-full">
                     Contact me
                 </h2>
-                <div className="contact-content flex flex-wrap gap-8 mt-4">
+                <div className="contact-content flex flex-wrap gap-8 my-4">
                     <div className="column left w-full md:w-1/2">
                         <div className="text text-lg font-semibold mb-4">Get in Touch</div>
                         <p className="text-justify mb-4">
@@ -20,21 +43,21 @@ const ContactUs = () => {
                                 <FaUser className="text-crimson text-2xl" />
                                 <div className="info ml-4">
                                     <div className="head font-medium">Name</div>
-                                    <div className="sub-title text-gray-800">Hem Bahadur Pun</div>
+                                    <div className="sub-title text-gray-800">{userProfile.name}</div>
                                 </div>
                             </div>
                             <div className="row flex items-center">
                                 <FaMapMarkerAlt className="text-crimson text-2xl" />
                                 <div className="info ml-4">
                                     <div className="head font-medium">Address</div>
-                                    <div className="sub-title text-gray-800">Pokhara, Nepal</div>
+                                    <div className="sub-title text-gray-800">{userProfile.address}</div>
                                 </div>
                             </div>
                             <div className="row flex items-center">
                                 <FaEnvelope className="text-crimson text-2xl" />
                                 <div className="info ml-4">
                                     <div className="head font-medium">Email</div>
-                                    <div className="sub-title text-gray-800">mail@gmail.com</div>
+                                    <div className="sub-title text-gray-800">{userProfile.email}</div>
                                 </div>
                             </div>
                         </div>

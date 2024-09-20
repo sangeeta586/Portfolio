@@ -32,6 +32,15 @@ export const createSkill = async (req, res) => {
 };
 
 
+export const getAllSkills = async (req, res) => {
+  try {
+    const skills = await Skill.find();
+    res.json(skills);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching skills', error: error.message });
+  }
+};
+
   export const getSkillById = async (req, res) => {
     try {
       const skill = await Skill.findById(req.params.id);

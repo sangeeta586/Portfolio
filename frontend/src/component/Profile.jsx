@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Typed from 'typed.js';
-import { motion } from 'framer-motion'; // Import motion from framer-motion
+import { motion } from 'framer-motion';
 
 export const Profile = () => {
     const [userProfile, setUserProfile] = useState(null);
@@ -48,8 +48,13 @@ export const Profile = () => {
         </p>
     );
 
+    // Handle cases where userProfile might be empty or missing fields
+    if (!userProfile.name || !userProfile.socialMedia) {
+        return <p className='flex justify-center items-center content-center'>User data is not available.</p>;
+    }
+
     return (
-        <section id="home" className="flex flex-col lg:flex-row items-center justify-between p-6 max-w-7xl mx-auto ">
+        <section id="home" className="flex flex-col lg:flex-row items-center justify-between p-6 max-w-7xl mx-auto">
             <div className="lg:w-2/3 text-center lg:text-left">
                 <motion.h1 
                     className="text-4xl font-bold mb-4"
@@ -63,11 +68,11 @@ export const Profile = () => {
                     I am a <span ref={typedRef} className="font-bold"></span>
                 </p>
                 <div className="flex justify-center lg:justify-start space-x-4 mb-6 mt-10 text-3xl">
-                    {userProfile.socialMedia.map((platform) => (
+                    {userProfile.socialMedia.length ? userProfile.socialMedia.map((platform) => (
                         <a key={platform._id} href={platform.url} className="hover:text-blue-600" target="_blank" rel="noopener noreferrer">
                             {getIcon(platform.name)}
                         </a>
-                    ))}
+                    )) : <p>No social media links available.</p>}
                 </div>
             </div>
             

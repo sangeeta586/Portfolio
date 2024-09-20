@@ -7,7 +7,7 @@ import  Skill  from './Skill';
 import { Project } from './Project';
 import { Footer } from './Footer';
 import { Profile } from './Profile';
-import ContactUs from './ContactUs';
+import  ContactUs  from './ContactUs';
 
 
 function Portfolio() {
@@ -16,12 +16,13 @@ function Portfolio() {
 
             <Navbar />
 
-            <main className="pt-20">
+            <main className="pt-20 ">
                 <Profile />
                 <Aboutme />
                 <Education />
                 <Skill />
                 <Project />
+                
 
             </main>
             <ContactUs/>
