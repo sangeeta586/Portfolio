@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import './Sidebar.css'; // Import the CSS file
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navagate = useNavigate()
   
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navagate('/login');
+
   };
 
   return (
@@ -26,7 +34,7 @@ const Sidebar = () => {
           <li><i className="icon"><i className="fa-solid fa-gem"></i></i><span>Experience</span></li>
           <li><i className="icon"><i className="fa-solid fa-gem"></i></i><span>Education</span></li>
           <li><i className="icon"><i className="fa-solid fa-gem"></i></i><span>Contact Info</span></li>
-          <li><i className="icon"><i className="fa-solid fa-right-from-bracket"></i></i><span>Logout</span></li>
+          <li onClick={handleLogout}><i className="icon"><i className="fa-solid fa-right-from-bracket"></i></i><span>Logout</span></li>
         </ul>
       </div>
       <button className="toggle-btn" onClick={toggleSidebar}>
