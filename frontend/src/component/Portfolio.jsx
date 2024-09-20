@@ -15,15 +15,14 @@ function Portfolio() {
         <div className="font-sans text-gray-900">
 
             <Navbar />
-             
-            <main className="pt-20 ">
+
+            <main className="pt-[2600px] ">
                 <Profile />
                 <Aboutme />
                 <Education />
                 <Skill />
                 <Project />
-                
-
+            
             </main>
             <ContactUs/>
             <Footer />

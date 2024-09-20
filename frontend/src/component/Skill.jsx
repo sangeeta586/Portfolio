@@ -34,7 +34,7 @@ const Skill = () => {
               <br />
               Visit my <a href="https://www.facebook.com/heemal.himalpun" target="_blank" rel="noopener noreferrer" id="link">Facebook</a> for more details or <a href="#contact" id="link">contact</a> me.
             </p>
-            <a href="#contact">Learn more</a>
+          +  <a href="#contact">Learn more</a>
           </div>
           <div className="column right">
             {skills.map((skill) => (

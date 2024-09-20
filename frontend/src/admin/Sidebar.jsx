@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { label: 'Profile', icon: <FaHouseUser />, route: '/profile' },
-    { label: 'Skills', icon: <GiSkills />, route: '/skills' },
+    { label: 'Skills', icon: <GiSkills />, route: '/skill' },
     { label: 'Projects', icon: <GoProjectSymlink />, route: '/projects' },
     { label: 'Experience', icon: <SiKnowledgebase />, route: '/experience' },
     { label: 'Education', icon: <MdCastForEducation />, route: '/education' },
@@ -32,7 +32,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="sidebar-wrapper">
+    <div className="sidebar-wrapper text-base font-semibold font-serif">
       <div className={`sidebar ${isOpen ? 'open' : ''}`} id="sidebar">
         <ul>
           <div className="profile">

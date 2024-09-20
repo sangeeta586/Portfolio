@@ -65,7 +65,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2500px;
+  
 }
 #home a {
   color: rgb(37, 35, 35);
@@ -320,7 +320,7 @@ section .title::before{
 }
 section .title::after{
   position: absolute;
-  bottom: -20px;
+  bottom: -8px;
   left: 50%;
   font-size: 20px;
   color: crimson;

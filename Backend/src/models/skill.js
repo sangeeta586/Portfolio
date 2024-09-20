@@ -19,6 +19,10 @@ const skillSchema = new mongoose.Schema({
     max: 5,
     required: true
   },
+  logo :{
+    type:String
+  }
+  ,
 projectUrl:[ {
  name :{
   type: String,

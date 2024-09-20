@@ -3,10 +3,10 @@ import './App.css';
 import Portfolio from './component/Portfolio';
 import UserRegistration from './component/UserRegistration';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Education } from './component/Eduction';
-import  Skill  from './component/Skill';
-import { Project } from './component/Project';
+import  Skill  from '../src/admin/skill/Skills';
 import { AdminDashboard } from './admin/AdminDashboard';
+import UpdateSkill from './admin/skill/UpdateSkill';
+import CreateSkill from './admin/skill/createSkill';
 
 
 const App = () => {
@@ -16,10 +16,16 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/login" element={<UserRegistration />} />
-        <Route path="/education" element={<Education />} />
+        {/* <Route path="/education" element={<Education />} />
         <Route path="/skills" element={<Skill />} />
-        <Route path="/projects" element={<Project />} />
+        <Route path="/projects" element={<Project />} /> */}
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+
+
+        {/* Routes forn admin user */}
+        <Route path="/skill" element={<Skill />} />
+        <Route path="/createSkill" element={<CreateSkill />} />
+        <Route path="/adminUpdateSkill/:id" element={<UpdateSkill/>} />
       </Routes>
     </Router>
   );

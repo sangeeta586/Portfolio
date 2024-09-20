@@ -1,5 +1,5 @@
 import Skill from "../models/skill.js"
-
+import uploadOnCloudinary from "../utils/cloudinary.js"
 export const createSkill = async (req, res) => {
   try {
     const { name, yearsExperience, description, rating, projectUrl } = req.body;
@@ -9,13 +9,26 @@ export const createSkill = async (req, res) => {
     if (skillExists) {
       return res.status(400).json({ message: 'Skill already exists.' });
     }
+    let logoLocalPath = null;
+    if (req.files && req.files.logo && req.files.logo.length > 0) {
+        logoLocalPath = req.files.logo[0].path;
+    }
 
+    
+
+    if (!logoLocalPath) {
+        return res.status(400).send("logo file is required");
+    }
+
+    const Newlogo = await uploadOnCloudinary(logoLocalPath);
+    
     // Create a new skill instance
     const skill = new Skill({
       name,
       yearsExperience,
       description,
       rating,
+      logo :Newlogo.url,
       projectUrl // Updated to match schema field name
     });
 
