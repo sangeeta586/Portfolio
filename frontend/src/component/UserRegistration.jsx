@@ -13,12 +13,6 @@ const UserRegistration = () => {
 
    const BASE_URL = import.meta.env.VITE_API_URL;
 
-   useEffect(()=>{
-   
-    if (localStorage.getItem("token")) {
-      nagivate("/admin-dashboard")
-    }
-   })
 
 
   const handleLoginSubmit = async (e) => {
@@ -37,10 +31,10 @@ const UserRegistration = () => {
       const data = await response.json();
       // Handle the response data
       console.log(data);
-      localStorage.setItem("token",data.token
-      )
+      localStorage.setItem("token",data.token)
       localStorage.setItem("userId",data.user.id)
       localStorage.setItem("email",data.user.email)
+
       
 
       nagivate("/admin-dashboard")
