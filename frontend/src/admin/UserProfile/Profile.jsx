@@ -24,7 +24,8 @@ export const Profile = () => {
     useEffect(() => {
         if (userProfile && typedRef.current) {
             const typed = new Typed(typedRef.current, {
-                strings: [userProfile.title || "Full Stack Web Developer"],
+                strings: [userProfile.title
+                    || "Full Stack Web Developer"],
                 typeSpeed: 90,
                 backSpeed: 100,
                 backDelay: 1000,

@@ -17,7 +17,7 @@ const projectSchema = new mongoose.Schema({
     trim: true
   },
   technologiesUsed: {
-    type: [String],  // Array of strings
+    type: [String],
     required: true
   },
   url: {
@@ -26,20 +26,22 @@ const projectSchema = new mongoose.Schema({
     trim: true
   },
   imageUrl: {
-    type: String,
+    type: [String], // Updated to an array for multiple images
     trim: true
   },
-  dateCreated: {
+  startDate: {
     type: Date,
-    default: Date.now
+    required: true // Made required
+  },
+  endDate: {
+    type: Date,
+    required: true // Made required
   },
   githubLink: {
     type: String,
-    trim: true
   },
   liveDemoLink: {
     type: String,
-    trim: true
   }
 });
 

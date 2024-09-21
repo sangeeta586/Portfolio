@@ -158,7 +158,7 @@ export const deleteUserById = async (req, res) => {
 export const updateUserById = async (req, res) => {
     try {
         const { userId } = req.params;
-        const { name, email, password, phoneNo, title, address, socialMedia } = req.body;
+        const { name, email, password, phoneNo, title, address, socialMedia,bio } = req.body;
         console.log("Update request body:", req.body);
         console.log("Files received:", req.files);
 
@@ -190,6 +190,7 @@ export const updateUserById = async (req, res) => {
         if (title) updateData.title = title;
         if (address) updateData.address = address;
         if (socialMedia) updateData.socialMedia = socialMedia;
+        if (bio) updateData.bio = bio;
 
         // Upload image if provided
         if (imageLocalPath) {

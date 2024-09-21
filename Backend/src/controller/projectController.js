@@ -1,11 +1,42 @@
 import Project from '../models/Project.js';
+import uploadOnCloudinary from "../utils/cloudinary.js"
+
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 
 // Create a new project
 export const createProject = async (req, res) => {
   try {
-    const project = new Project(req.body);
+    const { name, description, role, technologiesUsed, url, startDate, endDate, githubLink, liveDemoLink } = req.body;
+     
+    let imageLocalPath = null;
+    if (req.files && req.files.imageUrl && req.files.imageUrl.length > 0) {
+        imageLocalPath = req.files.imageUrl[0].path;
+    }
+
+    
+
+    if (!imageLocalPath) {
+        return res.status(400).send("Image file is required");
+    }
+
+    const image = await uploadOnCloudinary(imageLocalPath);
+    const project = new Project({
+      name,
+      description,
+      role,
+      technologiesUsed,
+      url,
+      imageUrl:image.url, // Handle multiple image URLs
+      startDate,
+      endDate,
+      githubLink,
+      liveDemoLink
+    });
     await project.save();
-    res.status(201).json(project);
+
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

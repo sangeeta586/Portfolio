@@ -9,6 +9,7 @@ import { AdminDashboard } from './admin/AdminDashboard';
 import UpdateSkill from './admin/skill/UpdateSkill';
 import CreateSkill from './admin/skill/createSkill';
 import CreateProfile from './admin/UserProfile/CreateProfile';
+import { Project } from './admin/project/Project';
 
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
         <Route path="/login" element={<UserRegistration />} />
         {/* <Route path="/education" element={<Education />} />
         <Route path="/skills" element={<Skill />} />
-        <Route path="/projects" element={<Project />} /> */}
+         */}
      
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/createSkill" element={<CreateSkill />} />
         <Route path="/adminUpdateSkill/:id" element={<UpdateSkill/>} />
         <Route path='/update-Bio' element={<CreateProfile/>} />
+        <Route path="/projects" element={<Project />} />
 
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>

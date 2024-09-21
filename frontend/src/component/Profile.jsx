@@ -54,7 +54,7 @@ export const Profile = () => {
     }
 
     return (
-        <section id="home" className="flex flex-col lg:flex-row items-center justify-between p-6 max-w-7xl mx-auto">
+        <section id="home" className="flex md:flex-col flex-col-reverse lg:flex-row items-center justify-between p-6 max-w-7xl mx-auto">
             <div className="lg:w-2/3 text-center lg:text-left">
                 <motion.h1 
                     className="text-4xl font-bold mb-4"

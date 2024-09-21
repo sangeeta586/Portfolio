@@ -5,13 +5,13 @@ import axios from 'axios';
 import { FaTimes } from 'react-icons/fa';
 
 const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
-    const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
+    const { register, handleSubmit, formState: { errors }, control } = useForm({
         defaultValues: {
             name: userProfile.name,
             email: userProfile.email,
             title: userProfile.title,
-            Bio: userProfile.Bio,
-            socialMedia: userProfile.socialMedia || [] // Set default values for social media
+            bio: userProfile.bio,
+            socialMedia: userProfile.socialMedia || []
         }
     });
 
@@ -19,14 +19,13 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
         control,
         name: 'socialMedia',
     });
-    
+
     const URI = import.meta.env.VITE_API_URL;
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post(`${URI}/api/users/update/${userProfile._id}`, data);
+            const response = await axios.put(`${URI}/api/users/update/${userProfile._id}`, data);
             console.log('Response from server:', response.data);
-            reset();
             alert('Profile updated successfully!');
             setShowModalUpdate(false);
         } catch (error) {
@@ -35,9 +34,13 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
         }
     };
 
+    const ErrorMessage = ({ message }) => (
+        <p className="text-red-600 text-sm">{message}</p>
+    );
+
     return (
         <motion.div
-            className="lg:w-[80%] md:w-[80%] w-full m-5 flex justify-center items-center flex-col bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 absolute inset-16 z-50 bg-opacity-90 min-h-[300px] max-h-[80vh] overflow-y-auto"
+            className="lg:w-[80%] md:w-[80%] lg:pt-40 md:pt-60 pt-96 w-full m-5 flex justify-center items-center flex-col bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 absolute inset-16 z-50 bg-opacity-90 min-h-[300px] max-h-[80vh] overflow-y-auto"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -61,7 +64,7 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
                         placeholder="Enter your name"
                         {...register('name', { required: 'Name is required' })}
                     />
-                    {errors.name && <p className="text-red-600 text-sm">{errors.name.message}</p>}
+                    {errors.name && <ErrorMessage message={errors.name.message} />}
                 </div>
 
                 {/* Email */}
@@ -79,7 +82,7 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
                             }
                         })}
                     />
-                    {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
+                    {errors.email && <ErrorMessage message={errors.email.message} />}
                 </div>
 
                 {/* Title */}
@@ -91,7 +94,7 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
                         placeholder="Enter your title"
                         {...register('title', { required: 'Title is required' })}
                     />
-                    {errors.title && <p className="text-red-600 text-sm">{errors.title.message}</p>}
+                    {errors.title && <ErrorMessage message={errors.title.message} />}
                 </div>
 
                 {/* Bio */}
@@ -100,7 +103,7 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
                     <textarea
                         className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                         placeholder="Tell us about yourself"
-                        {...register('Bio')}
+                        {...register('bio')}
                     />
                 </div>
 
@@ -114,14 +117,12 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
                                 placeholder="Name"
                                 className="w-1/2 p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                                 {...register(`socialMedia.${index}.name`)}
-                                defaultValue={field.name} // Default value for name
                             />
                             <input
                                 type="text"
                                 placeholder="URL"
                                 className="w-1/2 p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                                 {...register(`socialMedia.${index}.url`)}
-                                defaultValue={field.url} // Default value for URL
                             />
                             <button
                                 type="button"
@@ -144,7 +145,6 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
                 <button type="submit" className="w-40 bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition duration-200">
                     Save Changes
                 </button>
-                
             </form>
         </motion.div>
     );

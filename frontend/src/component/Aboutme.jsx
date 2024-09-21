@@ -12,7 +12,7 @@ export const Aboutme = () => {
   const fetchUserProfile = async () => {
     try {
       const response = await axios.get(`${URI}/api/users/getUser`);
-      console.log("Fetching user profile", response);
+     
       // Assuming the first user in the response is the desired user profile
       setUserProfile(response.data.users);
     } catch (error) {
@@ -21,7 +21,7 @@ export const Aboutme = () => {
   };
 
   if (!userProfile) return <p className='flex justify-center items-center content-center'><span class="loader"></span></p>;
-
+  console.log("Fetching user profile", userProfile.bio);
   // Find the resume URL in the socialMedia array
   const resumeLink = userProfile.socialMedia.find((social) => social.name === 'resume')?.url;
 

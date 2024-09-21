@@ -1,10 +1,11 @@
 import express from 'express';
 import { createProject,getAllProjects, getProjectById, updateProject, deleteProject } from '../controller/projectController.js';
+import { upload } from '../middleware/multerMiddleware.js';
 
 const router = express.Router();
 
 // Route to create a new project
-router.post('/create', createProject);
+router.post('/create', upload.fields([{ name: 'imageUrl', maxCount: 1 }]), createProject);
 
 // Route to get a project by ID
 router.get('/getById/:id', getProjectById);
