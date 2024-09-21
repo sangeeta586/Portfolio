@@ -10,6 +10,13 @@ const ContactUs = () => {
         address: ''
     });
 
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+    });
+
     const URI = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
@@ -25,6 +32,31 @@ const ContactUs = () => {
 
         fetchUserProfile();
     }, [URI]);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(`${URI}/api/contactme/create`, formData);
+            console.log("Response:", response.data);
+            // Reset form after successful submission
+            setFormData({
+                name: '',
+                email: '',
+                subject: '',
+                message: ''
+            });
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+    };
 
     return (
         <section className="contact bg-white py-12" id="contact">
@@ -64,23 +96,60 @@ const ContactUs = () => {
                     </div>
                     <div className="column right w-full md:w-1/2">
                         <div className="text text-lg font-semibold mb-4">Message me</div>
-                        <form action="#" className="space-y-4">
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="fields flex flex-wrap gap-4">
-                                <div className="field name flex-1">                               
-                                    <input type="text" placeholder="Name" required className="h-12 w-full border border-light-gray rounded-lg px-4 text-lg font-medium focus:border-gray-400" />
+                                <div className="field name flex-1">
+                                    <input 
+                                        type="text" 
+                                        name="name"
+                                        value={formData.name} 
+                                        onChange={handleInputChange} 
+                                        placeholder="Name" 
+                                        required 
+                                        className="h-12 w-full border border-light-gray rounded-lg px-4 text-lg font-medium focus:border-gray-400" 
+                                    />
                                 </div>
                                 <div className="field email flex-1">
-                                    <input type="email" placeholder="Email" required className="h-12 w-full border border-light-gray rounded-lg px-4 text-lg font-medium focus:border-gray-400" />
+                                    <input 
+                                        type="email" 
+                                        name="email"
+                                        value={formData.email} 
+                                        onChange={handleInputChange} 
+                                        placeholder="Email" 
+                                        required 
+                                        className="h-12 w-full border border-light-gray rounded-lg px-4 text-lg font-medium focus:border-gray-400" 
+                                    />
                                 </div>
                             </div>
                             <div className="field">
-                                <input type="text" placeholder="Subject" required className="h-12 w-full border border-light-gray rounded-lg px-4 text-lg font-medium focus:border-gray-400" />
+                                <input 
+                                    type="text" 
+                                    name="subject"
+                                    value={formData.subject} 
+                                    onChange={handleInputChange} z
+                                    placeholder="Subject" 
+                                    required 
+                                    className="h-12 w-full border border-light-gray rounded-lg px-4 text-lg font-medium focus:border-gray-400" 
+                                />
                             </div>
                             <div className="field textarea">
-                                <textarea cols="30" rows="10" placeholder="Message.." required className="h-20 w-full border border-light-gray rounded-lg px-4 text-lg font-medium resize-none focus:border-gray-400"></textarea>
+                                <textarea 
+                                    name="message"
+                                    value={formData.message} 
+                                    onChange={handleInputChange} 
+                                    cols="30" 
+                                    rows="10" 
+                                    placeholder="Message.." 
+                                    required 
+                                    className="h-20 w-full border border-light-gray rounded-lg px-4 text-lg font-medium resize-none focus:border-gray-400">
+                                </textarea>
                             </div>
                             <div className="button-area flex items-center">
-                                <button type="submit" className="w-40 h-12 border-2 border-crimson text-crimson font-medium rounded-lg hover:bg-crimson hover:text-white transition-all">Send message</button>
+                                <button 
+                                    type="submit" 
+                                    className="w-40 h-12 border-2 border-crimson text-crimson font-medium rounded-lg hover:bg-crimson hover:text-white transition-all">
+                                    Send message
+                                </button>
                             </div>
                         </form>
                     </div>

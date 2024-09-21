@@ -16,7 +16,7 @@ function Portfolio() {
 
             <Navbar />
 
-            <main className="pt-[2600px] ">
+            <main className="pt-[100px] ">
                 <Profile />
                 <Aboutme />
                 <Education />

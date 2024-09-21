@@ -10,6 +10,7 @@ import certificateRoutes from "./src/routes/certificateRoutes.js"
 import projectRoutes from "./src/routes/projectRoute.js"
 import experienceRoutes from "./src/routes/experienceRoute.js"
 import languageRoutes from "./src/routes/languageRoutes.js"
+import contactRoutes from "./src/routes/contactRoutes.js"
 
 dotenv.config();
 connectDb();
@@ -29,6 +30,7 @@ app.use('/api/certificates', certificateRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/experiences', experienceRoutes);
 app.use('/api/languages', languageRoutes);
+app.use('/api/contactme', contactRoutes);
 
 
 

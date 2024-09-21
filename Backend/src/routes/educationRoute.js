@@ -8,21 +8,21 @@ import {
   deleteEducation,
   getAllEducation
 } from '../controller/educationController.js';
-import authMiddleware from "../middleware/authMiddleware.js"
-
+//import authMiddleware from "../middleware/authMiddleware.js"
+import { upload } from '../middleware/multerMiddleware.js';
 const router = express.Router();
 
 // Create a new education record
-router.post('/create',authMiddleware, createEducation);
+router.post('/create',upload.fields([{ name: 'image', maxCount: 1 }]), createEducation);
 
 // Get an education record by ID
-router.get('/getById/:id',authMiddleware, getEducationById);
+router.get('/getById/:id', getEducationById);
 router.get('/getAllEdu', getAllEducation);
 
 // Update an education record by ID
-router.put('/update/:id', authMiddleware,updateEducation);
+router.put('/update/:id',updateEducation);
 
 // Delete an education record by ID
-router.delete('/delete/:id',authMiddleware, deleteEducation);
+router.delete('/delete/:id', deleteEducation);
 
 export default router;

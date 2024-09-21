@@ -27,6 +27,10 @@ const Skills = () => {
     navigate("/createSkill");
   };
 
+  const handleUpdateSkill = (id) => {
+    navigate(`/updateSkill/${id}`)
+  }
+
   return (
     <>
       <Sidebar />
@@ -41,8 +45,13 @@ const Skills = () => {
           skills.map((skill) => (
             <div className="card" key={skill._id}>
               <div className="image">
-                <img src={skill.imageUrl || "https://via.placeholder.com/150"} alt={skill.name} />
+                <img
+                  className="w-24 h-24 object-cover rounded-full"
+                  src={skill.logo || "https://via.placeholder.com/150"}
+                  alt={skill.name}
+                />
               </div>
+
               <h3 className="text-lg font-semibold">{skill.name}</h3>
               <p>{skill.description}</p>
               <div className="button">

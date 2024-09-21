@@ -22,12 +22,12 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { label: 'Profile', icon: <FaHouseUser />, route: '/profile' },
+    { label: 'Profile', icon: <FaHouseUser />, route: '/admin-dashboard' },
     { label: 'Skills', icon: <GiSkills />, route: '/skill' },
     { label: 'Projects', icon: <GoProjectSymlink />, route: '/projects' },
     { label: 'Experience', icon: <SiKnowledgebase />, route: '/experience' },
     { label: 'Education', icon: <MdCastForEducation />, route: '/education' },
-    { label: 'Contact Info', icon: <MdContactPhone />, route: '/contact' },
+    { label: 'Contact Info', icon: <MdContactPhone />, route: '/contactMe' },
     { label: 'Logout', icon: <FaSignOutAlt />, action: handleLogout },
   ];
 
