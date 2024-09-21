@@ -3,10 +3,9 @@ import './App.css';
 import Portfolio from './component/Portfolio';
 import UserRegistration from './component/UserRegistration';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Education } from './component/Eduction';
-import  Skill  from './component/Skill';
-import { Project } from './component/Project';
+
 import { AdminDashboard } from './admin/AdminDashboard';
+import CreateProfile from './admin/UserProfile/CreateProfile';
 
 
 const App = () => {
@@ -16,10 +15,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/login" element={<UserRegistration />} />
-        <Route path="/education" element={<Education />} />
-        <Route path="/skills" element={<Skill />} />
-        <Route path="/projects" element={<Project />} />
+     
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path='/update-Bio' element={<CreateProfile/>} />
+
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </Router>
   );

@@ -17,7 +17,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar-wrapper text-base font-semibold font-serif">
+    <div className="sidebar-wrapper text-base font-semibold font-serif z-10">
       <div className={`sidebar ${isOpen ? 'open' : ''}`} id="sidebar">
         <ul>
           <div className="profile">

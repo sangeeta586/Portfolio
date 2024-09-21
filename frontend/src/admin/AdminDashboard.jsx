@@ -4,7 +4,7 @@ import {Profile} from './UserProfile/Profile'
 
 export const AdminDashboard = () => {
   return (
-    <div>
+    <div className='flex justify-center content-center items-center'>
         <SideBar/>
         <Profile />
     </div>

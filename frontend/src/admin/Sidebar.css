@@ -18,11 +18,11 @@
   }
   
   .sidebar:hover:not(.open) {
-    width: 200px;
+    width: 300px;
   }
   
   .sidebar.open {
-    width: 200px;
+    width: 300px;
   }
   
   .sidebar .profile {
