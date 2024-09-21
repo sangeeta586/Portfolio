@@ -63,8 +63,9 @@ const CreateSkill = () => {
     const formDataToSubmit = new FormData();
     for (const key in formData) {
       if (key === 'projectUrl') {
-        formData[key].forEach((item) => {
-          formDataToSubmit.append('projectUrl[]', JSON.stringify(item)); // Keep this as is to avoid issues
+        formData[key].forEach((item, index) => {
+          formDataToSubmit.append(`projectUrl[${index}].name`, item.name);
+          formDataToSubmit.append(`projectUrl[${index}].url`, item.url);
         });
       } else {
         formDataToSubmit.append(key, formData[key]);
@@ -87,7 +88,7 @@ const CreateSkill = () => {
         logo: null,
         projectUrl: [{ name: '', url: '' }],
       });
-      navigate('');
+      navigate('/skill');
     } catch (error) {
       console.error('Error creating skill:', error);
     }

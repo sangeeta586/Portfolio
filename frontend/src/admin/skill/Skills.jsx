@@ -36,6 +36,10 @@ const Skills = () => {
     setShowModal(true);
   };
 
+  const handleUpdateSkill = (id) => {
+    navigate(`/updateSkill/${id}`)
+  }
+
   return (
     <div className='flex justify-center content-center flex-col'>
       <Sidebar />
@@ -52,6 +56,7 @@ const Skills = () => {
         {skills.length > 0 ? (
           skills.map((skill) => (
             <div className="card" key={skill._id}>
+<<<<<<< HEAD
               <div className="image w-20">
                 <img src={skill.logo || "https://via.placeholder.com/150"} alt={skill.name} className='w-40' />
               </div>
@@ -82,6 +87,18 @@ const Skills = () => {
                   <li className="text-gray-500">No projects available</li>
                 )}
               </ul>
+=======
+              <div className="image">
+                <img
+                  className="w-24 h-24 object-cover rounded-full"
+                  src={skill.logo || "https://via.placeholder.com/150"}
+                  alt={skill.name}
+                />
+              </div>
+
+              <h3 className="text-lg font-semibold">{skill.name}</h3>
+              <p>{skill.description}</p>
+>>>>>>> 0fc6a3fa273efb2a3493559b35411c29c215d63b
               <div className="button">
                 <button
                   onClick={() => handleUpdateSkill(skill)}

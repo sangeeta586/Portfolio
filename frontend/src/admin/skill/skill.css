@@ -51,7 +51,11 @@
 
 .card:hover .image {
   position: absolute;
+<<<<<<< HEAD
   inset: -4em 6em 0em 6em;
+=======
+  inset: -4em 2em 0em 6em;
+>>>>>>> 0fc6a3fa273efb2a3493559b35411c29c215d63b
 }
 
 img {
@@ -65,7 +69,10 @@ img {
   border-radius: 1.2em;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0fc6a3fa273efb2a3493559b35411c29c215d63b
 
 .card:hover p {
   transition-delay: 0.15s;
