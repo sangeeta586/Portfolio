@@ -84,14 +84,14 @@ export const Profile = () => {
     };
 
     return (
-        <div className='flex flex-col lg:px-0 md:px-5 px-10'>
+        <div className='flex flex-col w-full lg:px-0 md:px-0 pl-5 '>
             <div className="flex items-center justify-start lg:ml-0 md:ml-0 ml-10">
                 <div onClick={handleOnclick}>
                     <Button name={userProfile ? "Update Bio" : "Create Profile"} />
                 </div>
             </div>
-            <section className="flex md:flex-col flex-col-reverse lg:flex-row items-center justify-between p-6 gap-10">
-                <div className="lg:w-2/3 text-center lg:text-left">
+            <div className="flex md:flex-col flex-col-reverse lg:flex-row items-center justify-between p-6 gap-10 w-full">
+                <div className="lg:w-1/2 text-center lg:text-left">
                     <motion.h1
                         className="text-4xl font-bold mb-4"
                         initial={{ opacity: 0, y: 20 }}
@@ -112,7 +112,7 @@ export const Profile = () => {
                     </div>
                 </div>
 
-                <div className="lg:w-1/3 text-center mb-6 lg:mb-0">
+                <div className="lg:w-1/2 text-center mb-6 lg:mb-0">
                     <img
                         src={userProfile.image || "https://i.postimg.cc/Px1cN7b9/111.png"}
                         alt={`${userProfile.name} profile`}
@@ -144,7 +144,7 @@ export const Profile = () => {
                         <CreateProfile userProfile={userProfile} setShowModalUpdate={setShowModalUpdate} />
                     </div>
                 )}
-            </section>
+            </div>
         </div>
     );
 };

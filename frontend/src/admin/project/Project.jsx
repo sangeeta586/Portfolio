@@ -35,83 +35,91 @@ export const Project = () => {
     setShowModal(true); // Open the modal for editing
   };
 
-  const handleAddProject = () => {
+  const handleAddProject = () => 
+    {
     setSelectedProject(null); // Set to null to indicate adding a new project
     setShowModal(true); // Open the modal for adding
   };
 
-  return (
-    <div>
-      <Sidebar />
-
-      <div className="flex justify-between content-center items-center my-20">
-        <h1 className="text-4xl font-bold font-serif text-[#2C3E50]">My Projects</h1>
-        <button
-          className="bg-pink-500 text-white font-semibold py-2 px-4 rounded shadow-md transition-all duration-300 ease-in-out transform hover:bg-blue-800 hover:shadow-lg hover:scale-105"
-          onClick={handleAddProject}
-        >
-          Add Project
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <div
-            key={project._id}
-            className="bg-white rounded-lg shadow-lg overflow-hidden relative group transform transition-transform hover:scale-105 hover:shadow-2xl"
+  
+    return (
+      <div className='flex  content-center items-center flex-col pl-20 pr-2 lg:mt-[500px] md:mt-[600px] mt-[3200px] pt-96 pb-20'>
+        
+    
+        <div className="flex justify-between lg:px-4 md:px-3 gap-5 my-8 w-full ">
+          <h1 className="lg:text-4xl text-xl font-bold font-serif text-[#feffff]">My Projects</h1>
+          <button
+            className="border-2 p-4 border-red-500 text-red-500 hover:text-white font-semibold lg:py-2 px-4 rounded py-1 "
+            onClick={handleAddProject}
           >
-            {/* Image */}
-            <img
-              src={project.imageUrl || 'https://via.placeholder.com/500'}
-              alt={project.name}
-              className="w-full h-48 object-cover"
-            />
-
-            {/* Project Info */}
-            <div className="p-6">
-              <h3 className="text-xl font-bold mb-2">{project.name}</h3>
-              <p className="text-gray-700 mb-4">{project.description}</p>
-              <p className="text-gray-500 mb-2"><strong>Role:</strong> {project.role}</p>
-              <p className="text-gray-500 mb-4"><strong>Technologies Used:</strong> {project.technologiesUsed.join(', ')}</p>
-            </div>
-
-            {/* Buttons (Show on hover) */}
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <a href={project.url} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-                View Project
-              </a>
-              {project.githubLink && (
-                <a href={project.githubLink} className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors mt-2">
-                  GitHub
-                </a>
-              )}
-              {project.liveDemoLink && (
-                <a href={project.liveDemoLink} className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors mt-2">
-                  Live Demo
-                </a>
-              )}
-              <button
-                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition-colors mt-2"
-                onClick={() => handleUpdateProject(project)}
-              >
-                Edit Project
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Modal for Adding/Updating Project */}
-      {showModal && (
-        <div className="flex justify-center content-center items-center absolute z-30 inset-0">
-          <UpdateProject
-            showModal={setShowModal}
-            project={selectedProject} // Pass the selected project (or null) to the modal
-          />
+            Add Project
+          </button>
         </div>
-      )}
-    </div>
-  );
-};
+    
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {projects.map((project) => (
+            <div
+              key={project._id}
+              className="bg-[#222222] rounded-xl shadow-lg overflow-hidden relative group transform transition-transform hover:scale-105 hover:shadow-2xl text-white pb-4"
+            >
+              {/* Image */}
+              <div className='flex justify-center items-center content-center my-4'>
+                <img
+                  src={project.imageUrl || 'https://via.placeholder.com/500'}
+                  alt={project.name}
+                 className='lg:w-52 lg:h-52 md:w-32 md:h-32 w-20 h-32 rounded-full object-cover border-4 border-red-600 hover:border-white'
+                />
+              </div>
+    
+              {/* Project Info */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-center">{project.name}</h3>
+                <p className="text-gray-200 mb-4 line-clamp-4 text-justify">
+                  {project.description}
+                </p>
+    
+                <p className="text-gray-300 mb-2"><strong>Role:</strong> {project.role}</p>
+                <p className="text-gray-200 mb-4"><strong>Technologies Used:</strong> {project.technologiesUsed.join(', ')}</p>
+              </div>
+    
+              {/* Buttons (Show on hover) */}
+              <div className="flex flex-col justify-center items-center   ">
+                <div className=' flex flex-wrap justify-center items-center content-center gap-4'>
+                <a href={project.url} className="hover:bg-white text-white border-2 border-white px-4 py-2 rounded hover:text-black transition-colors mt-2">
+                  View Project
+                </a>
+                {project.githubLink && (
+                  <a href={project.githubLink} className="hover:bg-green-600 text-green-500 border-2 border-green-500 px-4 py-2 rounded hover:text-white transition-colors mt-2">
+                    GitHub
+                  </a>
+                )}
+                {project.liveDemoLink && (
+                  <a href={project.liveDemoLink} className="hover:bg-red-600 text-red-500 border-2 border-red-500 px-4 py-2 rounded hover:text-white transition-colors mt-2">
+                    Live Demo
+                  </a>
+                )}
+                <button
+                  className="hover:bg-red-600 text-red-500 border-2 border-red-500 px-4 py-2 rounded hover:text-white transition-colors mt-2"
+                  onClick={() => handleUpdateProject(project)}
+                >
+                  Update Project
+                </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+    
+        {/* Modal for Adding/Updating Project */}
+        {showModal && (
+          <div className="flex justify-center content-center items-center absolute z-30 inset-0">
+            <UpdateProject
+              showModal={setShowModal}
+              project={selectedProject} // Pass the selected project (or null) to the modal
+            />
+          </div>
+        )}
+      </div>
+    );
+  }   
 
-export default Project;

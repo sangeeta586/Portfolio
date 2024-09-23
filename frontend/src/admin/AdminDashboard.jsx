@@ -1,18 +1,15 @@
-import React, { Profiler } from 'react'
-import SideBar from './Sidebar' 
+import React from 'react'
 import {Profile} from './UserProfile/Profile'
-import { Aboutme } from '../component/Aboutme'
+import { AboutMe } from './UserProfile/AboutMe'
 
 export const AdminDashboard = () => {
   return (
-    <div className='flex justify-center content-center items-center'>
-        <SideBar/>
-       <div>
+    <div className='flex flex-col justify-center content-center items-center w-full'>
+    
        <Profile />
-       <div className=' lg:ml-2 md:ml-5 ml-20'>
-       <Aboutme/>
-       </div>
-       </div>
+      
+       <AboutMe/>
+      
 
     </div>
   )

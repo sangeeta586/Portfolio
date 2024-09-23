@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-export const Aboutme = () => {
+export const AboutMe = () => {
   const [userProfile, setUserProfile] = useState(null); // Initialize state as null
   const URI = import.meta.env.VITE_API_URL;
 
@@ -26,7 +26,7 @@ export const Aboutme = () => {
   const resumeLink = userProfile.socialMedia.find((social) => social.name === 'resume')?.url;
 
   return (
-    <section  className="py-12 max-w-7xl mx-auto ">
+    <section  className="py-12 max-w-7xl mx-auto lg:mx-0 md:mx-0 ml-20  lg:px-0 md:px-0 px-5">
       <h2 className="text-3xl font-bold mb-6">About Me</h2>
       <p className="text-lg mb-6">
         {userProfile.bio}

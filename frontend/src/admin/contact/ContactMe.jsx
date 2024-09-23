@@ -21,8 +21,8 @@ const ContactMe = () => {
     }, [URI]);
 
     return (
-        <>
-            <Sidebar />
+       
+           
             <div className="container mx-auto p-6">
                 <h1 className="text-4xl font-bold mb-8 text-gray-800">Contact Information</h1>
                 <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200">
@@ -59,7 +59,7 @@ const ContactMe = () => {
                     </table>
                 </div>
             </div>
-        </>
+  
     );
 };
 
