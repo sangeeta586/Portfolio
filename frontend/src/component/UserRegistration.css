@@ -1,25 +1,4 @@
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-  font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Ensure the body takes the full height of the viewport */
-}
-
-.forms-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center; /* Center the text inside forms-section */
-}
 
 .section-title {
   font-size: 36px; /* Increased font size */

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import UpdateProject from './UpdateProject';
+import { useNavigate } from 'react-router-dom';
 
 export const Project = () => {
   const [projects, setProjects] = useState([]);
@@ -9,6 +10,7 @@ export const Project = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null); // Track selected project for edit
+  const navigate  = useNavigate()
 
   const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -41,9 +43,13 @@ export const Project = () => {
     setShowModal(true); // Open the modal for adding
   };
 
+  const handleOnclick = (project) => {
+    navigate("/Project-Details", { state: { project } });
+  }
+
   
     return (
-      <div className='flex  content-center items-center flex-col pl-20 pr-2 lg:mt-[500px] md:mt-[600px] mt-[3200px] pt-96 pb-20'>
+      <div className='flex  content-center items-center flex-col pl-20 pr-2  pt-20 pb-20'>
         
     
         <div className="flex justify-between lg:px-4 md:px-3 gap-5 my-8 w-full ">
@@ -61,13 +67,13 @@ export const Project = () => {
             <div
               key={project._id}
               className="bg-[#222222] rounded-xl shadow-lg overflow-hidden relative group transform transition-transform hover:scale-105 hover:shadow-2xl text-white pb-4"
-            >
+             onClick={()=>handleOnclick(project)}>
               {/* Image */}
               <div className='flex justify-center items-center content-center my-4'>
                 <img
                   src={project.imageUrl || 'https://via.placeholder.com/500'}
                   alt={project.name}
-                 className='lg:w-52 lg:h-52 md:w-32 md:h-32 w-20 h-32 rounded-full object-cover border-4 border-red-600 hover:border-white'
+                 className='lg:w-52 lg:h-52 md:w-32 md:h-32 w-40 h-40 rounded-full object-cover border-4 border-red-600 hover:border-white'
                 />
               </div>
     

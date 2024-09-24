@@ -13,6 +13,7 @@ import CreateEducation from './admin/education/CreateEducation';
 import ContactMe from './admin/contact/ContactMe';
 import { Project } from './admin/project/Project';
 import Sidebar from './admin/Sidebar';
+import { ProjectDetils } from './admin/project/ProjectDetils';
 
 const App = () => {
   return (
@@ -56,7 +57,44 @@ const MainContent = () => {
         
         
         case'/projects':
-          return { backgroundColor: '#111111' }; 
+          return { backgroundColor: '#111111',
+            backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          overflowX: 'hidden',
+          height: '100vh', // Ensure it covers the full viewport height
+          width: '100vw',
+           }; 
+
+        case '/skill' :
+          return {backgroundImage: 'url("https://img.freepik.com/free-photo/blue-toned-collection-paper-sheets-with-copy-space_23-2148320445.jpg?w=900&t=st=1709066598~exp=1709067198~hmac=c5c0995a7289d90e1e59f33310d419716d3975cedc8f97a8f31c119f7619dcaf")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            overflowX: 'hidden',
+            height: '100vh', // Ensure it covers the full viewport height
+            width: '100vw',  // Ensure it covers the full viewport width
+           };   
+        
+           case '/admin-dashboard' :
+          return {backgroundImage: 'url("https://img.freepik.com/free-photo/blue-toned-collection-paper-sheets-with-copy-space_23-2148320445.jpg?w=900&t=st=1709066598~exp=1709067198~hmac=c5c0995a7289d90e1e59f33310d419716d3975cedc8f97a8f31c119f7619dcaf")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            overflowX: 'hidden',
+            height: '100vh', // Ensure it covers the full viewport height
+            width: '100vw',  // Ensure it covers the full viewport width
+           }; 
+           
+           case '/contactMe' :
+            return {backgroundImage: 'url("https://img.freepik.com/free-photo/blue-toned-collection-paper-sheets-with-copy-space_23-2148320445.jpg?w=900&t=st=1709066598~exp=1709067198~hmac=c5c0995a7289d90e1e59f33310d419716d3975cedc8f97a8f31c119f7619dcaf")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundAttachment: 'fixed',
+              overflowX: 'hidden',
+              height: '100vh', // Ensure it covers the full viewport height
+              width: '100vw',  // Ensure it covers the full viewport width
+             }; 
         
 
        
@@ -81,9 +119,10 @@ const MainContent = () => {
         <Route path="/update-Bio" element={<CreateProfile />} />
         <Route path="/education" element={<Education />} />
         <Route path="/createEducation" element={<CreateEducation />} />
-        <Route path="/contactMe" element={<ContactMe />} />
+        {/* <Route path="/contactMe" element={<ContactMe />} /> */}
         <Route path="/adminUpdateSkill/:id" element={<UpdateSkill />} />
         <Route path="/projects" element={<Project />} />
+        <Route path="/Project-Details" element={<ProjectDetils />} />
       </Routes>
     </div>
   );

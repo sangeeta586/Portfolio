@@ -26,7 +26,7 @@ export const Aboutme = () => {
   const resumeLink = userProfile.socialMedia.find((social) => social.name === 'resume')?.url;
 
   return (
-    <section  className="py-12 max-w-7xl mx-auto ">
+    <section id="about"  className="py-12 max-w-7xl mx-auto ">
       <h2 className="text-3xl font-bold mb-6">About Me</h2>
       <p className="text-lg mb-6">
         {userProfile.bio}

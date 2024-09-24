@@ -45,7 +45,7 @@ export const Project = () => {
             {/* Project Info */}
             <div className="p-6">
               <h3 className="text-xl font-bold mb-2">{project.name}</h3>
-              <p className="text-gray-700 mb-4">{project.description}</p>
+              <p className="text-gray-700 mb-4 line-clamp-4">{project.description}</p>
               <p className="text-gray-500 mb-2"><strong>Role:</strong> {project.role}</p>
               <p className="text-gray-500 mb-4"><strong>Technologies Used:</strong> {project.technologiesUsed.join(', ')}</p>
             </div>

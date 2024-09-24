@@ -66,7 +66,8 @@ const UserRegistration = () => {
   };
 
   return (
-    <section className="forms-section ">
+    <div className="flex justify-center content-center items-center mt-40 ">
+      <section className="flex justify-center content-center items-center ">
       {/* <h1 className="section-title ">Animated Forms</h1> */}
       <div className="forms">
         {/* Login Form */}
@@ -170,6 +171,7 @@ const UserRegistration = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

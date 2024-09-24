@@ -52,9 +52,9 @@ const Skills = () => {
   };
 
   return (
-    <div className='flex justify-center items-center flex-col lg:px-0 md:mx-0 ml-20  md:px-0 px-5 pt-96'>
-      <div className="flex justify-between items-center w-full px-4">
-        <h1 className='text-4xl font-bold font-serif text-[#2C3E50]'>My Skills</h1>
+    <div className='flex justify-center items-center flex-col lg:px-0 md:mx-0 ml-20  md:px-0 px-5 pt-20'>
+      <div className="flex justify-between items-center w-full lg:px-32 ">
+        <h1 className='lg:text-4xl text-2xl font-bold font-serif text-[#2C3E50]'>My Skills</h1>
         <button
           onClick={handleAddSkill}
           className="bg-pink-500 text-white font-semibold py-2 px-4 rounded shadow-md transition-all duration-300 ease-in-out transform hover:bg-blue-800 hover:shadow-lg hover:scale-105">
@@ -62,15 +62,15 @@ const Skills = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+      <div className="flex flex-wrap justify-center items-center content-center gap-8 mt-8">
         {skills.length > 0 ? (
           skills.map((skill) => (
             <div
               key={skill._id}
-              className="flex flex-col bg-[#2C3E50] h-auto lg:w-96 w-auto p-4 rounded-xl shadow-md shadow-white"
+              className="flex flex-col max-w-96 min-h-[500px] bg-[#2C3E50] p-4 rounded-xl shadow-md shadow-white"
             >
               {/* Image with hover effect */}
-              <div className="flex justify-center items-center content-center">
+              <div className="flex justify-center items-center flex-grow">
                 <img
                   src={skill.logo || "https://via.placeholder.com/150"}
                   alt={skill.name}
@@ -88,19 +88,18 @@ const Skills = () => {
               </div>
               
               {/* Projects List */}
-              <div className="mt-2  flex justify-start gap-5 flex-wrap">
+              <div className="mt-2 flex justify-start gap-5 flex-wrap">
                 {skill.projectUrl && skill.projectUrl.length > 0 ? (
                   skill.projectUrl.map((urlObj, index) => (
-                  
-                      <a
-                        href={urlObj.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:underline"
-                      >
-                        {urlObj.name}
-                      </a>
-                   
+                    <a
+                      key={index}
+                      href={urlObj.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline"
+                    >
+                      {urlObj.name}
+                    </a>
                   ))
                 ) : (
                   <li className="text-gray-500 text-center">No projects available</li>

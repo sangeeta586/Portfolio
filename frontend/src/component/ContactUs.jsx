@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaUser, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
-import "./ContactUs.css";
+import './ContactUs.css';
 
 const ContactUs = () => {
     const [userProfile, setUserProfile] = useState({
@@ -64,7 +64,7 @@ const ContactUs = () => {
                 <h2 className="title text-3xl font-bold relative after:absolute after:left-0 after:right-0 after:bottom-0 after:border-b-2 after:border-crimson after:w-full">
                     Contact me
                 </h2>
-                <div className="contact-content flex flex-wrap gap-8 my-4">
+                <div className="contact-content flex flex-wrap items-center gap-8 my-4">
                     <div className="column left w-full md:w-1/2">
                         <div className="text text-lg font-semibold mb-4">Get in Touch</div>
                         <p className="text-justify mb-4">
@@ -126,7 +126,7 @@ const ContactUs = () => {
                                     type="text" 
                                     name="subject"
                                     value={formData.subject} 
-                                    onChange={handleInputChange} z
+                                    onChange={handleInputChange} 
                                     placeholder="Subject" 
                                     required 
                                     className="h-12 w-full border border-light-gray rounded-lg px-4 text-lg font-medium focus:border-gray-400" 

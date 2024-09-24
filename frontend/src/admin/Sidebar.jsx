@@ -43,7 +43,7 @@ const Sidebar = () => {
     { label: 'Projects', icon: <GoProjectSymlink />, route: '/projects' },
     { label: 'Experience', icon: <SiKnowledgebase />, route: '/experience' },
     { label: 'Education', icon: <MdCastForEducation />, route: '/education' },
-    { label: 'Contact Info', icon: <MdContactPhone />, route: '/contactMe' },
+    // { label: 'Contact Info', icon: <MdContactPhone />, route: '/contactMe' },
     { label: 'Logout', icon: <FaSignOutAlt />, action: handleLogout },
   ];
 
