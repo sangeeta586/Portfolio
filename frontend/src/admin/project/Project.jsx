@@ -55,7 +55,7 @@ export const Project = () => {
         <div className="flex justify-between lg:px-4 md:px-3 gap-5 my-8 w-full ">
           <h1 className="lg:text-4xl text-xl font-bold font-serif text-[#feffff]">My Projects</h1>
           <button
-            className="border-2 p-4 border-red-500 text-red-500 hover:text-white font-semibold lg:py-2 px-4 rounded py-1 "
+            className="buttonLive-Demo font-semibold border-2 "
             onClick={handleAddProject}
           >
             Add Project
@@ -91,21 +91,21 @@ export const Project = () => {
               {/* Buttons (Show on hover) */}
               <div className="flex flex-col justify-center items-center   ">
                 <div className=' flex flex-wrap justify-center items-center content-center gap-4'>
-                <a href={project.url} className="hover:bg-white text-white border-2 border-white px-4 py-2 rounded hover:text-black transition-colors mt-2">
+                <a href={project.url} className="buttonView">
                   View Project
                 </a>
                 {project.githubLink && (
-                  <a href={project.githubLink} className="hover:bg-green-600 text-green-500 border-2 border-green-500 px-4 py-2 rounded hover:text-white transition-colors mt-2">
+                  <a href={project.githubLink} className="buttonGitHub">
                     GitHub
                   </a>
                 )}
                 {project.liveDemoLink && (
-                  <a href={project.liveDemoLink} className="hover:bg-red-600 text-red-500 border-2 border-red-500 px-4 py-2 rounded hover:text-white transition-colors mt-2">
+                  <a href={project.liveDemoLink} className="buttonLive-Demo">
                     Live Demo
                   </a>
                 )}
                 <button
-                  className="hover:bg-red-600 text-red-500 border-2 border-red-500 px-4 py-2 rounded hover:text-white transition-colors mt-2"
+                  className="buttonLive-Demo"
                   onClick={() => handleUpdateProject(project)}
                 >
                   Update Project

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from "../Sidebar";
 import UpdateSkill from './UpdateSkill';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -52,7 +51,7 @@ const Skills = () => {
   };
 
   return (
-    <div className='flex justify-center items-center flex-col lg:px-0 md:mx-0 ml-20  md:px-0 px-5 pt-20'>
+    <div className='flex justify-center items-center flex-col lg:px-0 md:mx-0 ml-20  md:px-0 px-5 py-20'>
       <div className="flex justify-between items-center w-full lg:px-32 ">
         <h1 className='lg:text-4xl text-2xl font-bold font-serif text-[#2C3E50]'>My Skills</h1>
         <button
@@ -110,9 +109,9 @@ const Skills = () => {
               <div className="flex justify-center items-center content-center">
                 <button
                   onClick={() => handleUpdateSkill(skill)}
-                  className="p-3 px-10 my-4 border-white text-white border-2 rounded-xl hover:bg-[#FFFFFF] hover:text-black font-semibold"
+                  className="button1"
                 >
-                  Update
+                  Update {skill.name}
                 </button>
               </div>
             </div>

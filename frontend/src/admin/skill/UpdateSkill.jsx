@@ -78,7 +78,7 @@ const UpdateSkill = ({ showModal, skill }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4  rounded-lg shadow-lg max-h-screen overflow-y-auto">
+    <div className="max-w-lg mx-auto p-4 rounded-lg shadow-lg h-[90%] overflow-y-auto">
       <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-lg">
         <div className='flex justify-between content-center items-center'>
           <h2 className="text-2xl font-bold mb-4">{skill ? 'Update Skill' : 'Add Skill'}</h2>

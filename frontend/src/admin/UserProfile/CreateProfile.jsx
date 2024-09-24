@@ -40,7 +40,7 @@ const CreateProfile = ({ userProfile, setShowModalUpdate }) => {
 
     return (
         <motion.div
-            className="lg:w-[80%] md:w-[80%] lg:pt-40 md:pt-60 pt-96 w-full m-5 flex justify-center items-center flex-col bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 absolute inset-16 z-50 bg-opacity-90 min-h-[300px] max-h-[80vh] overflow-y-auto"
+            className="lg:w-[90%] md:w-[90%] w-[75%]  lg:pt-96 pt-60  m-5 flex justify-center items-center flex-col bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 absolute inset-16 z-50 bg-opacity-90 min-h-[300px] max-h-[800px] overflow-y-auto"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}

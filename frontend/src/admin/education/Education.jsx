@@ -44,7 +44,7 @@ const Education = () => {
       <div className="fixed top-12 right-12 p-4">
         <button
           onClick={handleAddEducation}
-          className="bg-pink-500 text-white font-semibold py-2 px-4 rounded shadow-md transition-all duration-300 ease-in-out transform hover:bg-green-500 hover:shadow-lg hover:scale-105"
+          className="button font-semibold border-2"
         >
           Add Education
         </button>
@@ -52,7 +52,7 @@ const Education = () => {
 
       <div className="w-full grid grid-cols-1 gap-8 ml-20 py-20">
         {edus.map((edu) => (
-          <div key={edu._id} className="flex flex-col lg:flex-row items-center bg-white rounded-lg shadow-lg overflow-hidden p-4">
+          <div key={edu._id} className="flex flex-col lg:flex-row items-center bg-white rounded-lg  overflow-hidden p-4">
             <div className="w-full lg:w-1/2 flex justify-center mb-4 lg:mb-0">
               <img
                 className="object-cover w-full h-48 lg:h-auto"
@@ -69,10 +69,10 @@ const Education = () => {
                 {formatDate(edu.session.start)} - {formatDate(edu.session.end)}
               </p>
               <button
-                className="block text-center mt-4 border border-gray-600 p-2 text-black hover:text-white font-bold rounded hover:bg-blue-700 hover:border-none transition"
+                className="button my-4"
                 onClick={() => handleUpdateEducation(edu)}
               >
-                Update
+                Update Education
               </button>
             </div>
           </div>
@@ -80,7 +80,7 @@ const Education = () => {
       </div>
 
       {showModel && (
-        <div className="flex justify-center items-center fixed inset-0 bg-gray-900 bg-opacity-50">
+        <div className="flex justify-center items-center fixed inset-0 bg-gray-900 bg-opacity-50 z-10">
           <CreateEducation showmodel={setShowModel} selectedEdu={selectedEdu} />
         </div>
       )}

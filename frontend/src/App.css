@@ -371,3 +371,224 @@ section .title::after{
     transform: rotate(360deg)
   }
 }
+
+
+/*  button anination */
+@mixin colorChange($color, $amount) {
+  color: lighten($color, $amount);
+  background-color: $color;
+}
+
+.button {
+  cursor: pointer;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  min-height: 40px;
+  user-select: none;
+  color: #EC4899;
+  padding: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #EC4899;
+  transition: all 0.5s ease;
+  z-index: 1;
+
+  &:hover {
+    color: #FFF; /* Text color becomes white on hover */
+    @include colorChange(#4287f5, 10%);
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #EC4899;
+    z-index: -10;
+    transition: width 0.5s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+
+.button1 {
+  cursor: pointer;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  min-height: 40px;
+  font-weight: 500;
+  user-select: none;
+  color: #fbfbfb;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #ffffff;
+  transition: all 0.5s ease;
+  z-index: 1;
+  margin: 40px;
+
+  &:hover {
+    color: #000000; /* Text color becomes white on hover */
+    @include colorChange(#4287f5, 10%);
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #ffffff;
+    z-index: -10;
+    transition: width 0.5s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+
+
+.buttonView {
+  cursor: pointer;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  min-height: 40px;
+  font-weight: 500;
+  user-select: none;
+  color: #fbfbfb;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #ffffff;
+  transition: all 0.5s ease;
+  z-index: 1;
+  
+
+  &:hover {
+    color: #000000; /* Text color becomes white on hover */
+    @include colorChange(#4287f5, 10%);
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #ffffff;
+    z-index: -10;
+    transition: width 0.5s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+
+.buttonGitHub {
+  cursor: pointer;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  min-height: 40px;
+  font-weight: 500;
+  user-select: none;
+  color: #0531f9;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #1547ec;
+  transition: all 0.5s ease;
+  z-index: 1;
+  
+
+  &:hover {
+    color: #ffffff; /* Text color becomes white on hover */
+    @include colorChange(#4287f5, 10%);
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #1955d4;
+    z-index: -10;
+    transition: width 0.5s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+
+
+.buttonLive-Demo {
+  cursor: pointer;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  min-height: 40px;
+  font-weight: 500;
+  user-select: none;
+  color: #f94205;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #ec2e15;
+  transition: all 0.5s ease;
+  z-index: 1;
+  
+
+  &:hover {
+    color: #ffffff; /* Text color becomes white on hover */
+    @include colorChange(#4287f5, 10%);
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #d41919;
+    z-index: -10;
+    transition: width 0.5s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+
+
