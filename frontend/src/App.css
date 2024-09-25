@@ -504,6 +504,49 @@ section .title::after{
 }
 
 
+.buttonView1 {
+  cursor: pointer;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  min-height: 40px;
+  font-weight: 500;
+  user-select: none;
+  color: #000000;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #000000;
+  transition: all 0.5s ease;
+  z-index: 1;
+  
+
+  &:hover {
+    color: #fffefe; /* Text color becomes white on hover */
+    @include colorChange(#4287f5, 10%);
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #000000;
+    z-index: -10;
+    transition: width 0.5s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+
 .buttonGitHub {
   cursor: pointer;
   position: relative;
@@ -591,4 +634,66 @@ section .title::after{
 }
 
 
+/*  Experience btn */
 
+
+.Add-Experience {
+  cursor: pointer;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px; /* Default font size */
+  min-height: 40px;
+  font-weight: 500;
+  user-select: none;
+  color: #1221ff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #6200ff;
+  transition: all 0.5s ease;
+  z-index: 1;
+  display: inline-block;
+  width: 100%; /* Full width for smaller screens */
+  max-width: 300px; /* Limit max width */
+}
+
+.Add-Experience:hover {
+  color: #ffffff;
+  background-color: #4287f5; /* Background color change on hover */
+}
+
+.Add-Experience::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 1px;
+  background-color: #0400ff;
+  z-index: -1;
+  transition: width 0.5s ease;
+}
+
+.Add-Experience:hover::before {
+  width: 100%;
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+  .Add-Experience {
+    font-size: 12px; /* Smaller font size */
+    padding: 8px 10px; /* Adjust padding for smaller screens */
+    min-height: 35px;
+  }
+}
+
+/* Responsive styles for very small screens (e.g., phones) */
+@media (max-width: 480px) {
+  .Add-Experience {
+    font-size: 10px; /* Further reduce font size */
+    padding: 6px 12px; /* More compact padding */
+    min-height: 30px;
+    max-width: 100%; /* Full width on mobile */
+  }
+}

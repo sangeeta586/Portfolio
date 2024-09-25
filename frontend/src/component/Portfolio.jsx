@@ -8,6 +8,7 @@ import { Project } from './Project';
 import { Footer } from './Footer';
 import { Profile } from './Profile';
 import  ContactUs  from './ContactUs';
+import WorkExperience from './WorkExperience';
 
 
 function Portfolio() {
@@ -19,6 +20,7 @@ function Portfolio() {
             <main className="pt-[100px] ">
                 <Profile />
                 <Aboutme />
+                <WorkExperience/>
                 <Education />
                 <Skill />
                 <Project />

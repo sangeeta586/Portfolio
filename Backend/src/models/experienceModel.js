@@ -14,7 +14,7 @@ const experienceSchema = new mongoose.Schema({
   session: {
     startDate: {
       type: Date,
-      required: true
+     
     },
     endDate: {
       type: Date

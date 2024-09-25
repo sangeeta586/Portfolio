@@ -14,6 +14,7 @@ import ContactMe from './admin/contact/ContactMe';
 import { Project } from './admin/project/Project';
 import Sidebar from './admin/Sidebar';
 import { ProjectDetils } from './admin/project/ProjectDetils';
+import { ExperienceHomePage } from './admin/experience/ExperienceHomePage';
 
 const App = () => {
   return (
@@ -123,6 +124,7 @@ const MainContent = () => {
         <Route path="/adminUpdateSkill/:id" element={<UpdateSkill />} />
         <Route path="/projects" element={<Project />} />
         <Route path="/Project-Details" element={<ProjectDetils />} />
+         <Route path="/experience" element={<ExperienceHomePage/>} />
       </Routes>
     </div>
   );

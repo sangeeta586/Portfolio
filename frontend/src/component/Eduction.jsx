@@ -21,7 +21,10 @@ export const Education = () => {
 
   return (
     <section id="education" className="py-12 bg-gray-100 w-screen">
-      <h2 className="text-4xl font-extrabold text-center mb-8 text-gray-800">Education</h2>
+      <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold">Education</h2>
+          <span className="block w-20 h-1 bg-blue-800 mx-auto mt-2"></span>
+        </div>
       <div className="relative overflow-hidden">
         <div className="flex flex-nowrap gap-8 animate-slide w-full justify-center ">
           {educationRecords.length === 0 ? (
