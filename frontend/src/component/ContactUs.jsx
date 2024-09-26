@@ -64,7 +64,7 @@ const ContactUs = () => {
                 <h2 className="title text-3xl font-bold relative after:absolute after:left-0 after:right-0 after:bottom-0 after:border-b-2 after:border-crimson after:w-full">
                     Contact me
                 </h2>
-                <div className="contact-content flex flex-wrap items-center gap-8 my-4">
+                <div className=" lg:flex md:flex block items-center gap-10 my-4">
                     <div className="column left w-full md:w-1/2">
                         <div className="text text-lg font-semibold mb-4">Get in Touch</div>
                         <p className="text-justify mb-4">
@@ -94,8 +94,8 @@ const ContactUs = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="column right w-full md:w-1/2">
-                        <div className="text text-lg font-semibold mb-4">Message me</div>
+                    <div className="column right w-full md:w-1/2 ">
+                        <div className="text text-lg font-semibold my-4">Message me</div>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="fields flex flex-wrap gap-4">
                                 <div className="field name flex-1">

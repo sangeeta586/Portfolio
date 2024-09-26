@@ -12,6 +12,8 @@ import experienceRoutes from "./src/routes/experienceRoute.js"
 import languageRoutes from "./src/routes/languageRoutes.js"
 import contactRoutes from "./src/routes/contactRoutes.js"
 
+import logoRoutes from "./src/routes/logoRoutes.js"
+
 dotenv.config();
 connectDb();
 
@@ -31,6 +33,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/experiences', experienceRoutes);
 app.use('/api/languages', languageRoutes);
 app.use('/api/contactme', contactRoutes);
+app.use('/api/logo', logoRoutes);
 
 
 
