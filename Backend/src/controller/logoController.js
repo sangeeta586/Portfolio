@@ -20,7 +20,7 @@ export const createLogo = async (req, res) => {
     
     // Create a new logo instance
     const logo = new Logo({
-      logo: newLogo // Assuming newLogo contains the URL after uploading to Cloudinary
+      logo: newLogo.url // Assuming newLogo contains the URL after uploading to Cloudinary
     });
 
     // Save the logo to the database
