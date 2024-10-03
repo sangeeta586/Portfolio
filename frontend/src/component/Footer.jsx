@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useTheme } from '../ThemeContext'; // Import your theme context
 
 export const Footer = () => {
   const [userProfile, setUserProfile] = useState(null);
   const URI = import.meta.env.VITE_API_URL;
+  const { isDarkMode } = useTheme(); // Get dark mode state from context
 
   useEffect(() => {
     fetchUserProfile();
@@ -12,7 +14,7 @@ export const Footer = () => {
   const fetchUserProfile = async () => {
     try {
       const response = await axios.get(`${URI}/api/users/getUser`);
-      console.log("Fetched data:", response.data.users); // Log fetched data
+      
       setUserProfile(response.data.users);
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -20,22 +22,20 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-800 text-white text-center py-6">
-      <div className="container mx-auto">
+    <footer className={`py-6 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-800 text-white'}`}>
+      <div className="container mx-auto text-center">
         <p className="text-lg font-semibold">&copy; 2024 {userProfile ? userProfile.name : 'Sangeeta'}</p>
         <p>{userProfile ? userProfile.title : 'All rights reserved.'}</p>
 
-     
-
         {/* Navigation Links */}
         <div className="mt-4">
-          <a href="#home" className="text-gray-400 hover:text-white mx-2">About Us</a>
-          <a href="#about" className="text-gray-400 hover:text-white mx-2">Services</a>
-          <a href="#workexperience" className="text-gray-400 hover:text-white mx-2">Projects</a>
-          <a href="#skills" className="text-gray-400 hover:text-white mx-2">Skills</a>
-          <a href="#education" className="text-gray-400 hover:text-white mx-2">Contact</a>
-          <a href="#projects" className="text-gray-400 hover:text-white mx-2">Education</a>
-          <a href="#contact" className="text-gray-400 hover:text-white mx-2">Contact</a>
+          <a href="#home" className={`mx-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}>About Us</a>
+          <a href="#about" className={`mx-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}>Services</a>
+          <a href="#workexperience" className={`mx-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}>Projects</a>
+          <a href="#skills" className={`mx-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}>Skills</a>
+          <a href="#education" className={`mx-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}>Contact</a>
+          <a href="#projects" className={`mx-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}>Education</a>
+          <a href="#contact" className={`mx-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`}>Contact</a>
         </div>
 
         {/* Social Media Links */}
@@ -44,7 +44,7 @@ export const Footer = () => {
             <a 
               key={media._id.$oid} 
               href={media.url} 
-              className="text-gray-400 hover:text-white mx-2" 
+              className={`mx-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'}`} 
               target="_blank" 
               rel="noopener noreferrer"
             >

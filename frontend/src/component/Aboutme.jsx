@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useTheme } from '../ThemeContext'; // Import your theme context
 
 export const Aboutme = () => {
   const [userProfile, setUserProfile] = useState(null); // Initialize state as null
   const URI = import.meta.env.VITE_API_URL;
+  const { isDarkMode } = useTheme(); // Get dark mode state from context
 
   useEffect(() => {
     fetchUserProfile();
@@ -12,7 +14,6 @@ export const Aboutme = () => {
   const fetchUserProfile = async () => {
     try {
       const response = await axios.get(`${URI}/api/users/getUser`);
-     
       // Assuming the first user in the response is the desired user profile
       setUserProfile(response.data.users);
     } catch (error) {
@@ -20,13 +21,14 @@ export const Aboutme = () => {
     }
   };
 
-  if (!userProfile) return <p className='flex justify-center items-center content-center'><span class="loader"></span></p>;
+  if (!userProfile) return <p className='flex justify-center items-center content-center'><span className="loader"></span></p>;
+  
   console.log("Fetching user profile", userProfile.bio);
   // Find the resume URL in the socialMedia array
   const resumeLink = userProfile.socialMedia.find((social) => social.name === 'resume')?.url;
 
   return (
-    <section id="about"  className="py-12 max-w-7xl mx-auto lg:px-0 md:px-0 px-5">
+    <section id="about" className={`py-12 max-w-7xl mx-auto lg:px-0 md:px-0 px-5 ${isDarkMode ? 'bg-gray-900 text-white' : ''}`}>
       <h2 className="text-3xl font-bold mb-6">About Me</h2>
       <p className="text-lg mb-6">
         {userProfile.bio}
@@ -38,7 +40,13 @@ export const Aboutme = () => {
             View Resume
           </a>
         )}
-        <a href="#contact" className="border border-gray-800 text-gray-800 px-4 py-2 rounded hover:bg-gray-100">Contact Me</a>
+       <a 
+          href="#contact" 
+          className={`border px-4 py-2 rounded transition duration-300 ease-in-out 
+            ${isDarkMode ? 'bg-gray-900 text-white border-gray-700 hover:bg-gray-800' : 'border-gray-800 text-gray-800 hover:bg-gray-100 hover:text-black'}`}
+        >
+          Contact Me
+        </a>
       </div>
     </section>
   );

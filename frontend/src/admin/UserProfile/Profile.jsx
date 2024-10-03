@@ -21,9 +21,6 @@ export const Profile = () => {
     const URI = import.meta.env.VITE_API_URL;
     const userId = localStorage.getItem("userId");
 
-
-   
-
     useEffect(() => {
         fetchUserProfile();
     }, []);
@@ -67,6 +64,32 @@ export const Profile = () => {
         fetchMessages(); // Fetch messages on component mount
     }, [URI]);
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedImage(file);
+
+        // Create a preview of the selected image
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setImagePreview(null);
+        }
+    };
+
+    const handleImageUpload = () => {
+        if (!selectedImage) return;
+
+        const formData = new FormData();
+        formData.append('image', selectedImage);
+
+        // Call API to upload the image here...
+        console.log("Image uploaded!");
+    };
+
     // Display loader while fetching user profile
     if (!userProfile) return (
         <p className='flex justify-center items-center'>
@@ -86,11 +109,9 @@ export const Profile = () => {
                 </div>
                 <div className="relative">
                      <RightDrawer/>
-                    {/* {messages.length > 0 && ( */}
                         <div className="absolute top-[-20px] right-[28px] bg-red-500 text-white w-7 h-7 text-sm flex justify-center items-center text-center  rounded-full px-2">
                             <p>{messages.length}</p>
                         </div>
-                    {/* )} */}
                 </div>
             </div>
             <div className="flex md:flex-col flex-col-reverse lg:flex-row items-center justify-between p-6 pl-0 gap-10 w-full">

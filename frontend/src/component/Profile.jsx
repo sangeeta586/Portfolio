@@ -2,11 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Typed from 'typed.js';
 import { motion } from 'framer-motion';
+import { useTheme } from '../ThemeContext';
 
 export const Profile = () => {
     const [userProfile, setUserProfile] = useState(null);
     const typedRef = useRef(null);
     const URI = import.meta.env.VITE_API_URL;
+    const { isDarkMode } = useTheme();
 
     // Fetch user profile data on component mount
     useEffect(() => {

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // Make sure axios is installed
+import axios from 'axios'; // Ensure axios is installed
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../ThemeContext';
 
 export const Project = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate  = useNavigate()
+  const navigate = useNavigate();
+  const { isDarkMode } = useTheme(); // Get dark mode state
 
   const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -25,15 +27,28 @@ export const Project = () => {
     fetchProjects();
   }, []);
 
-  const handleOnclick = (project) => {
-    navigate("/Project-Details", { state: { project } });
-  }
+  const handleOnClick = (project) => {
+    navigate("/about-project", { state: { project } });
+  };
 
   if (loading) return <p className='flex justify-center items-center content-center'><span className="loader"></span></p>;
   if (error) return <p>Error: {error}</p>;
 
+  const lightModeStyles = {
+    backgroundImage: 'url("https://img.freepik.com/free-photo/blue-toned-collection-paper-sheets-with-copy-space_23-2148320445.jpg?w=900&t=st=1709066598~exp=1709067198~hmac=c5c0995a7289d90e1e59f33310d419716d3975cedc8f97a8f31c119f7619dcaf")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+    overflowX: 'hidden',
+    
+  };
+
   return (
-    <section id="projects" className="py-12 px-10">
+    <section 
+      id="projects" 
+      style={isDarkMode ? {} : lightModeStyles} // Apply light mode styles only when not in dark mode
+      className={`py-12 px-10 ${isDarkMode ? 'bg-gray-900 text-white' : 'text-black'}`} // Adjust classes for text color
+    >
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold">My Projects</h2>
         <span className="block w-20 h-1 bg-blue-800 mx-auto mt-2"></span>
@@ -42,8 +57,8 @@ export const Project = () => {
         {projects.map((project) => (
           <div 
             key={project._id} 
-            className="bg-white rounded-lg shadow-lg overflow-hidden relative group transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-            onClick={() => handleOnclick(project)}
+            className={`rounded-lg shadow-lg overflow-hidden relative group transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`} // Adjust card color
+            onClick={() => handleOnClick(project)}
           >
             {/* Image */}
             <img 
@@ -55,23 +70,23 @@ export const Project = () => {
             {/* Project Info */}
             <div className="p-6">
               <h3 className="text-xl font-bold mb-2">{project.name}</h3>
-              <p className="text-gray-700 mb-4 line-clamp-4">{project.description}</p>
-              <p className="text-gray-500 mb-2"><strong>Role:</strong> {project.role}</p>
-              <p className="text-gray-500 mb-4"><strong>Technologies Used:</strong> {JSON.parse(project.technologiesUsed[0]).join(', ')}</p>
+              <p className={`mb-4 line-clamp-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{project.description}</p>
+              <p className="mb-2"><strong>Role:</strong> {project.role}</p>
+              <p className="mb-4"><strong>Technologies Used:</strong> {JSON.parse(project.technologiesUsed[0]).join(', ')}</p>
             </div>
 
             {/* Buttons (Show on hover) */}
             <div className='flex justify-center content-center items-center gap-4 p-4 flex-wrap'>
-              <a href={project.url} className="buttonView1">
+              <a href={project.url} className={`buttonView1 ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
                 View Project
               </a>
               {project.githubLink && (
-                <a href={project.githubLink} className="buttonGitHub">
+                <a href={project.githubLink} className={`buttonGitHub ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
                   GitHub
                 </a>
               )}
               {project.liveDemoLink && (
-                <a href={project.liveDemoLink} className="buttonLive-Demo">
+                <a href={project.liveDemoLink} className={`buttonLive-Demo ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
                   Live Demo
                 </a>
               )}
