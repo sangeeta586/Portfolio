@@ -78,18 +78,62 @@ export const getEducationById = async (req, res) => {
   }
 };
 
-// Update an education record by ID
+// Update an education record by ID (only update provided fields)
 export const updateEducation = async (req, res) => {
   try {
-    const education = await Education.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    // Initialize an empty object to hold the fields to update
+    let updateData = {};
+
+    // Check and add each field only if it's present in req.body
+    if (req.body.degree) updateData.degree = req.body.degree;
+    if (req.body.specialization) updateData.specialization = req.body.specialization;
+    if (req.body.instituteName) updateData.instituteName = req.body.instituteName;
+    if (req.body.percentage) updateData.percentage = req.body.percentage;
+    if (req.body.address) updateData.address = req.body.address;
+    
+    // Check and update session fields if present
+    if (req.body.session) {
+      updateData.session = {};
+      if (req.body.session.start) updateData.session.start = req.body.session.start;
+      if (req.body.session.end) updateData.session.end = req.body.session.end;
+    }
+
+    if (req.body.description) updateData.description = req.body.description;
+    if (req.body.achievements && Array.isArray(req.body.achievements)) {
+      updateData.achievements = req.body.achievements;
+    }
+
+    // Check if a new image is provided
+    if (req.files && req.files.image && req.files.image.length > 0) {
+      const imageLocalPath = req.files.image[0].path;
+
+      // Upload the new image to Cloudinary
+      const uploadedImage = await uploadOnCloudinary(imageLocalPath);
+      
+      // Add the uploaded image URL to updateData
+      updateData.image = uploadedImage.url;
+    }
+
+    // If no fields were provided, return an error
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ message: 'No fields provided to update' });
+    }
+
+    // Update the education record with the selectively updated fields
+    const education = await Education.findByIdAndUpdate(req.params.id, updateData, { new: true, runValidators: true });
+
     if (!education) {
       return res.status(404).json({ message: 'Education record not found' });
     }
+
+    console.log("Updated Education Data:", updateData);
     res.status(200).json(education);
+
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 // Delete an education record by ID
 export const deleteEducation = async (req, res) => {

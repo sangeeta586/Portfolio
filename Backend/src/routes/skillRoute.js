@@ -11,7 +11,7 @@ router.get('/getById/:id', getSkillById);
 router.get('/getAllSkills', getAllSkills);
 
 // Update a skill by ID
-router.put('/update/:id', updateSkill);
+router.put('/update/:id',upload.fields([{ name: 'logo', maxCount: 1 }]), updateSkill);
 
 // Delete a skill by ID
 router.delete('/delete/:id',authMiddleware, deleteSkill);

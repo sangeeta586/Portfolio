@@ -96,3 +96,14 @@ export const getCertificateById = async (req, res) => {
     res.status(500).json({ error: 'Failed to get certificate' });
   }
 };
+
+
+
+export const getAllCertificates = async (req, res) => {
+  try {
+    const certificates = await Certificate.find();
+    res.json(certificates);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching certificates', error: error.message });
+  }
+};

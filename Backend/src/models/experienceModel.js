@@ -20,6 +20,9 @@ const experienceSchema = new mongoose.Schema({
       type: Date
     }
   },
+  current :{
+    type:Boolean,
+  },
   achievements: {
     type: [String], // An array of strings to hold multiple achievements
     default: []

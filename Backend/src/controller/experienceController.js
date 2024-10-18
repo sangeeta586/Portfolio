@@ -2,7 +2,7 @@ import Experience from '../models/experienceModel.js'; // Adjust path as necessa
 
 // Create a new experience
 export const createExperience = async (req, res) => {
-  const { jobTitle, company, session, achievements } = req.body;
+  const { jobTitle, company, session, current, achievements } = req.body;
 
 
 
@@ -11,6 +11,7 @@ export const createExperience = async (req, res) => {
     jobTitle,
     company,
     session,
+    current,
     achievements,
     
   });

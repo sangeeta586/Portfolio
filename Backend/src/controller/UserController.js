@@ -1,71 +1,66 @@
 import User from "../models/User.js"
 import uploadOnCloudinary from "../utils/cloudinary.js"
-import bcrypt from "bcrypt"
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import { StatusCodes } from 'http-status-codes';
 
 // Get the current directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const createUser = async (req, res) => {
-  try {
-      //console.log("req.body: ", req.body); // Log request body fields
-      
-      const { name, email, password, phoneNo, title, address, socialMedia } = req.body;
 
-      const userExists = await User.findOne({ email });
-      if (userExists) {
-          return res.status(400).json({ message: 'User with this email already exists.' });
-      }
+// Signup Controller
+export const signupController = async (req, res) => {
+    try {
+        const { name, email, password, phoneNo, title, Bio, address, socialMedia } = req.body;
 
-      let imageLocalPath = null;
-      if (req.files && req.files.image && req.files.image.length > 0) {
-          imageLocalPath = req.files.image[0].path;
-      }
+        // Validate if all required fields are provided
+        if (!name || !email || !password) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Name, Email, and Password are required.' });
+        }
 
-      
+        // Check if the user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(StatusCodes.CONFLICT).json({ message: 'Email already registered. Please use a different one.' });
+        }
 
-      if (!imageLocalPath) {
-          return res.status(400).send("Image file is required");
-      }
+        // Create new user instance
+        const newUser = new User({
+            name,
+            email,
+            password,
+            phoneNo,
+            title,
+            Bio,
+            address,
+            socialMedia
+        });
 
-      const image = await uploadOnCloudinary(imageLocalPath);
-      
+        // Save the user in the database
+        const savedUser = await newUser.save();
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      const user = new User({
-          name,
-          email,
-          password: hashedPassword,
-          image: image.url,
-          phoneNo,
-          title,
-          address,
-          socialMedia
-      });
-
-      await user.save();
-
-      res.status(201).json({
-          message: 'User created successfully!',
-          user: {
-              id: user._id,
-              name: user.name,
-              email: user.email,
-              image: user.image,
-              phoneNo: user.phoneNo,
-              title: user.title,
-              address: user.address,
-              socialMedia: user.socialMedia
-          }
-      });
-  } catch (err) {
-      res.status(500).json({ message: 'Error creating user', error: err.message });
-  }
+        // Send back the response without the token
+        res.status(StatusCodes.CREATED).json({
+            message: 'User registered successfully.',
+            user: {
+                id: savedUser._id,
+                name: savedUser.name,
+                email: savedUser.email,
+                phoneNo: savedUser.phoneNo,
+                title: savedUser.title,
+                Bio: savedUser.Bio,
+                address: savedUser.address,
+                socialMedia: savedUser.socialMedia
+            }
+        });
+    } catch (error) {
+        console.error('Error in user registration:', error.message);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Server error, please try again later.' });
+    }
 };
+
 
 
 export const loginUser = async (req, res) => {
@@ -75,20 +70,20 @@ export const loginUser = async (req, res) => {
         // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(401).json({ message: 'Invalid email or password' });
+            return res.status(401).json({ message: 'Invalid email or password (user not found)' });
         }
 
         // Compare the provided password with the hashed password
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid email or password' });
+            return res.status(401).json({ message: 'Invalid email or password (password mismatch)' });
         }
 
-        // Generate a JWT token or session here (optional)
-        // For simplicity, we are just returning a success message
-        const token = user.createJWT()
+        // Generate a JWT token or session here
+        const token = user.createJWT();
         res.status(200).json({
-            message: 'Login successful!',token,
+            message: 'Login successful!',
+            token,
             user: {
                 id: user._id,
                 name: user.name,
@@ -101,9 +96,11 @@ export const loginUser = async (req, res) => {
             }
         });
     } catch (err) {
+        console.error('Error during login:', err);
         res.status(500).json({ message: 'Error logging in', error: err.message });
     }
 };
+
 
 
 export const getUserById = async (req, res) => {
@@ -196,14 +193,19 @@ export const updateUserById = async (req, res) => {
         if (imageLocalPath) {
             try {
                 const uploadedImage = await uploadOnCloudinary(imageLocalPath);
-                console.log("Uploaded image URL:", uploadedImage.url);
-                updateData.image = uploadedImage.url;
+        
+                if (uploadedImage && uploadedImage.url) {
+                    updateData.image = uploadedImage.url;
+                } else {
+                    console.error("Upload failed; received invalid response:", uploadedImage);
+                    return res.status(500).json({ message: 'Invalid response from image upload' });
+                }
             } catch (error) {
-                console.error("Error uploading image to Cloudinary:", error);
-                return res.status(500).json({ message: 'Error uploading image', error: error.message });
+                console.error("Error during upload:", error);
+                return res.status(500).json({ message: 'Error during upload', error: error.message });
             }
         }
-
+        
         // Perform the update
         const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true });
 

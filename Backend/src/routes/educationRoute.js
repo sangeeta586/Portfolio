@@ -20,7 +20,7 @@ router.get('/getById/:id', getEducationById);
 router.get('/getAllEdu', getAllEducation);
 
 // Update an education record by ID
-router.put('/update/:id',updateEducation);
+router.put('/update/:id',upload.fields([{ name: 'image', maxCount: 1 }]),updateEducation);
 
 // Delete an education record by ID
 router.delete('/delete/:id', deleteEducation);

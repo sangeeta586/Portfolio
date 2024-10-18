@@ -1,14 +1,15 @@
 import express from 'express';
-import { createUser ,loginUser, getUserById,deleteUserById,updateUserById, getUser  } from '../controller/UserController.js';
+import { loginUser, getUserById,deleteUserById,updateUserById, getUser, signupController  } from '../controller/UserController.js';
 import { upload } from '../middleware/multerMiddleware.js';
 import authMiddleware from "../middleware/authMiddleware.js"
 
 const router = express.Router();
 
+
 router.post(
-    '/create',
-    upload.fields([{ name: 'image', maxCount: 1 }]), // Use maxCount of 1 for a single file
-    createUser
+    '/signup',
+   
+    signupController
 );
 
 router.post('/login', loginUser);

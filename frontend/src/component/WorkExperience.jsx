@@ -22,9 +22,15 @@ const WorkExperience = () => {
     }
   };
 
+  // Helper function to format dates as "Month Year"
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
-    <div 
-      id="workexperience" 
+    <div
+      id="workexperience"
       className={`py-20 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}
     >
       <div className="container mx-auto">
@@ -53,7 +59,10 @@ const WorkExperience = () => {
                 <h3 className="text-2xl font-bold mb-3">{exp.jobTitle}</h3>
                 <div className="text-gray-600 text-sm mb-2 flex items-center">
                   <FontAwesomeIcon icon={faCalendar} className="mr-2" />
-                  {new Date(exp.session.startDate).toLocaleDateString()} - {new Date(exp.session.endDate).toLocaleDateString()}
+                  <p className="mt-4 text-lg text-right">
+                    {exp.session?.startDate ? formatDate(exp.session.startDate) : 'Start Date not available'} -
+                    {exp.session?.endDate ? formatDate(exp.session.endDate) : 'Present'}
+                  </p>
                 </div>
                 {exp.company && (
                   <h4 className="text-lg mb-4">

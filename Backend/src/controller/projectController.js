@@ -4,43 +4,46 @@ import uploadOnCloudinary from "../utils/cloudinary.js"
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
-
-
 // Create a new project
 export const createProject = async (req, res) => {
   try {
     const { name, description, role, technologiesUsed, url, startDate, endDate, githubLink, liveDemoLink } = req.body;
-     
-    let imageLocalPath = null;
-    if (req.files && req.files.imageUrl && req.files.imageUrl.length > 0) {
-        imageLocalPath = req.files.imageUrl[0].path;
-    }
-
     
+    let imageUrls = [];
 
-    if (!imageLocalPath) {
-        return res.status(400).send("Image file is required");
+    // Check if images are provided in the request
+    if (req.files && req.files.imageUrl && req.files.imageUrl.length > 0) {
+      // Iterate through each image and upload to Cloudinary
+      for (const file of req.files.imageUrl) {
+        const uploadedImage = await uploadOnCloudinary(file.path);
+        imageUrls.push(uploadedImage.url); // Add the URL to the imageUrls array
+      }
+    } else {
+      return res.status(400).send("Image files are required");
     }
 
-    const image = await uploadOnCloudinary(imageLocalPath);
+    // Create a new project with multiple image URLs
     const project = new Project({
       name,
       description,
       role,
       technologiesUsed,
       url,
-      imageUrl:image.url, // Handle multiple image URLs
+      imageUrl: imageUrls, // Store multiple image URLs in an array
       startDate,
       endDate,
       githubLink,
       liveDemoLink
     });
+
     await project.save();
+    res.status(201).json(project);
 
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 export const getAllProjects = async (req, res) => {
   try {

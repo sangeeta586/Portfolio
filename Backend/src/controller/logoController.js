@@ -4,12 +4,12 @@ import fs from 'fs';
 
 // Create a new logo
 export const createLogo = async (req, res) => {
-  try {
-    let logoLocalPath = null;
+  let logoLocalPath = null; // Declare outside of try block
 
+  try {
     // Check if the file is present
     if (req.files && req.files.logo && req.files.logo.length > 0) {
-      logoLocalPath = req.files.logo[0].path;
+      logoLocalPath = req.files.logo[0].path; // Assign logoLocalPath here
     }
 
     if (!logoLocalPath) {
@@ -17,7 +17,7 @@ export const createLogo = async (req, res) => {
     }
 
     const newLogo = await uploadOnCloudinary(logoLocalPath);
-    
+
     // Create a new logo instance
     const logo = new Logo({
       logo: newLogo.url // Assuming newLogo contains the URL after uploading to Cloudinary
@@ -28,12 +28,13 @@ export const createLogo = async (req, res) => {
 
     // Send the newly created logo back to the client
     res.status(201).send(logo);
+
   } catch (error) {
     console.error("Error creating logo:", error);
     res.status(500).send("Failed to create logo");
   } finally {
     // Delete the temporary uploaded file if it exists
-    if (logoLocalPath) {
+    if (logoLocalPath && fs.existsSync(logoLocalPath)) {
       fs.unlinkSync(logoLocalPath);
     }
   }
@@ -51,11 +52,12 @@ export const getLogos = async (req, res) => {
 };
 
 // Update a logo
+// Update a logo
 export const updateLogo = async (req, res) => {
   const { id } = req.params; // Extracting the logo ID from the request parameters
-  try {
-    let logoLocalPath = null;
+  let logoLocalPath = null; // Declare outside of try block
 
+  try {
     // Check if the new file is present
     if (req.files && req.files.logo && req.files.logo.length > 0) {
       logoLocalPath = req.files.logo[0].path;
@@ -66,7 +68,7 @@ export const updateLogo = async (req, res) => {
     // If a new logo file is provided, upload it to Cloudinary
     if (logoLocalPath) {
       const newLogo = await uploadOnCloudinary(logoLocalPath);
-      updatedLogo.logo = newLogo; // Set the new logo URL
+      updatedLogo.logo = newLogo.url; // Set the new logo URL, not the entire object
     }
 
     // Update the logo in the database
@@ -82,11 +84,12 @@ export const updateLogo = async (req, res) => {
     res.status(500).send("Failed to update logo");
   } finally {
     // Delete the temporary uploaded file if it exists
-    if (logoLocalPath) {
+    if (logoLocalPath && fs.existsSync(logoLocalPath)) {
       fs.unlinkSync(logoLocalPath);
     }
   }
 };
+
 
 // Delete a logo
 export const deleteLogo = async (req, res) => {

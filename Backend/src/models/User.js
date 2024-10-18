@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     title: {
         type: String
     },
-    Bio:{
+    bio:{
         type: String,
         
     },
@@ -43,7 +43,6 @@ const userSchema = new mongoose.Schema({
     }]
 }, { timestamps: true });
 
-
 userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) {
         return next();
@@ -51,15 +50,24 @@ userSchema.pre('save', async function(next) {
 
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
+    
+    // Log the hashed password before saving
+    console.log('Hashed password before saving:', this.password);
+    
     next();
 });
 
 
+
 userSchema.methods.comparePassword = async function(userPassword) {
-    console.log('Comparing password:', userPassword);
-    console.log('Stored hash:', this.password);
-    return await bcrypt.compare(userPassword, this.password);
-}
+    console.log('User-provided password:', userPassword);
+    console.log('Stored hashed password in DB:', this.password);
+    
+    const isMatch = await bcrypt.compare(userPassword, this.password);
+    console.log('Password comparison result:', isMatch);
+    return isMatch;
+};
+
 userSchema.methods.createJWT = function(){
     return JWT.sign({userId : this._id},process.env.JWT_SECRET,{expiresIn:'1d'})
 }
