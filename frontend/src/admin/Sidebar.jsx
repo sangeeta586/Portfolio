@@ -35,7 +35,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/login-ramnarayanMandal');
+    navigate('/login-sangeeta');
   };
 
   const openModal = () => setIsModalOpen(true);
